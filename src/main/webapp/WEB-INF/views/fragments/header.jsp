@@ -11,9 +11,9 @@
 </header><hr>
 
 <button onclick="location.href='<c:url value="/"/>'" type="button">STRONA GŁÓWNA</button>
-<button onclick="location.href='<c:url value="/"/>'" type="button">REJESTRACJA</button>
-<button onclick="location.href='<c:url value="/"/>'" type="button">LOGOWANIE</button>
-<button onclick="location.href='<c:url value="/"/>'" type="button">O APLIKACJI</button>
-<button onclick="location.href='<c:url value="/"/>'" type="button">TRASY</button>
-<button onclick="location.href='<c:url value="/"/>'" type="button">KONTAKT</button>
+<button onclick="location.href='<c:url value="/register"/>'" type="button">REJESTRACJA</button>
+<button onclick="location.href='<c:url value="/login"/>'" type="button">LOGOWANIE</button>
+<button onclick="location.href='<c:url value="/about"/>'" type="button">O APLIKACJI</button>
+<button onclick="location.href='<c:url value="/routes/all"/>'" type="button">TRASY</button>
+<button onclick="location.href='<c:url value="/contact"/>'" type="button">KONTAKT</button>
 <div style="display: inline-block">Zalogowany jako: <b>GOŚĆ</b></div><hr>

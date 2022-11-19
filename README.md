@@ -30,6 +30,8 @@ Welcome to Web application for motorcyclists.
 2. Connecting Moto Route app with Google Maps
 3. Checking routes details via Google APIs
 4. Administration features
+- Adding/editing/deleting regions and route types
+- Deleting/editing users
 5. Advanced front-end
 
 ## Contact us

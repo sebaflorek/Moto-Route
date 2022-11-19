@@ -9,12 +9,18 @@
 <%@ include file="fragments/header.jsp" %>
 
 <table style="width: 100%">
-    <%--<if>--%>
     <%@ include file="fragments/sideMenu.jsp" %>
-    <%--</if>--%>
     <td class="mainContent">
-        <h2>Welcome to Moto Route App</h2>
-        <h2 style="color: #98671e">Currently under construction</h2>
+        <h2>Witamy na platformie Moto Route!</h2>
+        <p>W miejscu dla motocyklistów poszukujących ciekawych tras na krótkie przejażdżki oraz kilkudniowe wycieczki</p>
+        <h3>Wybierz, ściągnij i jedź...</h3>
+        <p>Zastanawiasz się gdzie się przejechać? Masz już dość znanych na pamięć tras?
+            Planujesz dalszą wycieczkę? Zarejestruj się i wybierz dla siebie jedną z wielu dostępnych tras.
+            Ściągnij wybraną trasę i ruszaj przed siebie.</p>
+        <h3>Polub i udostępnij...</h3>
+        <p>Podobała Ci się trasa? Polub i udostępnij trasę innym</p>
+        <h3>Zaplanuj wycieczkę</h3>
+        <p>Razem z Moto Route zaplanuj kilkudniową wycieczkę. Wybierz trasy i dodaj je do swojej wycieczki.</p>
     </td>
 </table>
 
