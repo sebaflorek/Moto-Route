@@ -1,0 +1,23 @@
+.sideBtn {
+    width: 100px;
+    background-color: darkorange;
+}
+
+.sideBtn:hover {
+    width: 100px;
+    background-color: black;
+    color: white;
+}
+
+td.sideMenu {
+    display: inline-block;
+    width: 100px;
+    vertical-align: top;
+}
+
+td.mainContent {
+    border: 2px solid darkgrey;
+    width: 100%;
+    padding: 10px;
+    vertical-align: top
+}

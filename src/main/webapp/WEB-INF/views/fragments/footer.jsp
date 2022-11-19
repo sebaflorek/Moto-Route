@@ -1,1 +1,1 @@
-<footer><hr><p>&copy; 2022 Moto Route App by Sebastian Florek</p></footer>
+<footer><hr><p>Copyrights &copy; 2022 Moto Route App by Sebastian Florek. All rights reserved.</p></footer>
