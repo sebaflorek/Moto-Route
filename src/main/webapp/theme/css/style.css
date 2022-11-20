@@ -10,13 +10,15 @@
 }
 
 td.sideMenu {
+    border: 2px solid darkgrey;
+    background-color: lightgray;
     display: inline-block;
     width: 100px;
     vertical-align: top;
 }
 
 td.mainContent {
-    border: 2px solid darkgrey;
+    /*border: 2px solid darkgrey;*/
     width: 100%;
     padding: 10px;
     vertical-align: top
@@ -25,3 +27,19 @@ td.mainContent {
 .dashCol {
     color: #de7800;
 }
+
+.routeName {
+    color: #de7800;
+    font-weight: bold;
+}
+
+#routeBtn {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+#routeBtn:hover {
+    border-radius: 3px;
+    background-color: darkorange;
+}
+
