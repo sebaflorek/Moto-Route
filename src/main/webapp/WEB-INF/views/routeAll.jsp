@@ -19,32 +19,30 @@
             <table class="tab">
                 <tr>
                     <td width="300px" height="300px">
-                        <iframe id="myFrame" src="${route.map}/embed/"
-                                width="100%" height="100%" style="border:none;" allowfullscreen="" loading="lazy"
-                        ></iframe>
+                        <iframe id="smallFrame" src="${route.map}/embed/" allowfullscreen="" loading="lazy"></iframe>
                     </td>
 
-                    <td style="vertical-align: top; padding-left: 10px">
+                    <td class="routeInfo">
                         Rodzaj trasy: <b>${route.type.name}</b><br>
                         Lokalizacja: <b>${route.region.name}</b><br>
                         Długość trasy: <b>${route.distance}km</b><br>
-                        <button id="routeBtn" onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
                             Szczegóły
                         </button>
                         <br>
-                        <button id="routeBtn" onclick="location.href='<c:url value="/route/all"/>'" type="button">
-                            Ściągnij
+                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                            Dodaj do ulubionych
                         </button>
                         <br>
-                        <button id="routeBtn" onclick="location.href='<c:url value="/route/all"/>'" type="button">Dodaj
-                            do ulubionych
+                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                            Pobierz
                         </button>
                         <br>
-                        <button id="routeBtn" onclick="location.href='<c:url value="/route/all"/>'" type="button">
-                            Udostępnij
+                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                            Wyślij
                         </button>
                         <br>
-                        <button id="routeBtn" onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
                             Polub
                         </button>
                         <br>

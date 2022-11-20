@@ -1,13 +1,4 @@
-.sideBtn {
-    width: 100px;
-    background-color: darkorange;
-}
-
-.sideBtn:hover {
-    width: 100px;
-    background-color: black;
-    color: white;
-}
+/*DASHBOARD*/
 
 td.sideMenu {
     border: 2px solid darkgrey;
@@ -17,6 +8,23 @@ td.sideMenu {
     vertical-align: top;
 }
 
+.sideMenu button {
+    width: 100px;
+    background-color: darkorange;
+}
+
+.sideMenu button:hover {
+    width: 100px;
+    background-color: black;
+    color: white;
+}
+
+.dashCol {
+    color: #de7800;
+}
+
+/*MAIN CONTENT*/
+
 td.mainContent {
     /*border: 2px solid darkgrey;*/
     width: 100%;
@@ -24,22 +32,33 @@ td.mainContent {
     vertical-align: top
 }
 
-.dashCol {
-    color: #de7800;
-}
+/*ROUTE CONTENT*/
 
 .routeName {
     color: #de7800;
     font-weight: bold;
 }
 
-#routeBtn {
+#smallFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    border-radius: 10px;
+}
+
+.routeInfo {
+    vertical-align: top;
+    padding-left: 10px;
+}
+
+.routeInfo button {
     margin-top: 10px;
     padding: 5px;
 }
 
-#routeBtn:hover {
+.routeInfo button:hover {
     border-radius: 3px;
     background-color: darkorange;
 }
+
 
