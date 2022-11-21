@@ -19,8 +19,10 @@ public class Route {
 
     private int distance;
 
+    @Column(length = 2000)
     private String map;
 
+    @Column(length = 500)
     private String description;
 
     @ManyToOne

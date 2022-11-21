@@ -40,4 +40,9 @@ public class RouteController {
         model.addAttribute("routeList", routes);
         return "routeAll";
     }
+
+    @RequestMapping("/dashboard") // tymczasowo
+    public String showPulpit() {
+        return "dashboard";
+    }
 }

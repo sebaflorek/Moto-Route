@@ -14,7 +14,7 @@ import java.util.List;
 public class RouteService {
     private final RouteRepository routeRepository;
 
-    public void add(Route route) {
+    public void save(Route route) {
         routeRepository.save(route);
     }
 
@@ -26,9 +26,9 @@ public class RouteService {
         return routeRepository.findAll();
     }
 
-    public void update(Route route) {
-        routeRepository.save(route);
-    }
+//    public void update(Route route) {
+//        routeRepository.save(route);
+//    }
 
     public void deleteById(long id) {
         routeRepository.deleteById(id);

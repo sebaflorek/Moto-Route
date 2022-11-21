@@ -14,7 +14,7 @@ import java.util.List;
 public class RegionService {
     private final RegionRepository regionRepository;
 
-    public void add(Region region) {
+    public void save(Region region) {
         regionRepository.save(region);
     }
 
@@ -26,9 +26,9 @@ public class RegionService {
         return regionRepository.findAll();
     }
 
-    public void update(Region region) {
-        regionRepository.save(region);
-    }
+//    public void update(Region region) {
+//        regionRepository.save(region);
+//    }
 
     public void deleteById(long id) {
         regionRepository.deleteById(id);

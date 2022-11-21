@@ -9,6 +9,6 @@
     <button onclick="location.href='<c:url value="/"/>'" type="button">WYCIECZKI</button><br><br>
     <button onclick="location.href='<c:url value="/"/>'" type="button">EDYTUJ PROFIL</button><br><br>
     <button onclick="location.href='<c:url value="/"/>'" type="button">ZMIEŃ HASŁO</button><br><br>
-    <button onclick="location.href='<c:url value="/"/>'" type="button">WYLOGUJ</button>
+    <button onclick="location.href='<c:url value="/logout"/>'" type="button">WYLOGUJ</button>
 </td>
 <%--<if>--%>

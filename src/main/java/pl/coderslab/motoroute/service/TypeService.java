@@ -16,7 +16,7 @@ import java.util.List;
 public class TypeService {
     private final TypeRepository typeRepository;
 
-    public void add(Type type) {
+    public void save(Type type) {
         typeRepository.save(type);
     }
 
@@ -28,9 +28,9 @@ public class TypeService {
         return typeRepository.findAll();
     }
 
-    public void update(Type type) {
-        typeRepository.save(type);
-    }
+//    public void update(Type type) {
+//        typeRepository.save(type);
+//    }
 
     public void deleteById(long id) {
         typeRepository.deleteById(id);
