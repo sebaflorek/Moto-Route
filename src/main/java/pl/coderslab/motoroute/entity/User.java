@@ -3,6 +3,9 @@ package pl.coderslab.motoroute.entity;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.Set;
 
@@ -17,12 +20,16 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true, length = 60)
+    @NotEmpty(message = "Nazwa użytkownika jest wymagana")
     private String username;
 
     @Column(nullable = false)
+    @NotEmpty(message = "Hasło jest wymagane")
     private String password;
 
     @Column(nullable = false, unique = true, length = 60)
+    @NotEmpty(message = "Email jest wymagany")
+    @Email(message = "Niepoprawny email")
     private String email;
 
     private int enabled;

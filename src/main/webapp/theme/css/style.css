@@ -61,4 +61,32 @@ td.mainContent {
     background-color: darkorange;
 }
 
+/*ERRORS*/
+
+.errorMsg {
+    display: block;
+    margin: 1px auto;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+    color: #D8000C;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+    background-size: 16px;
+    border-bottom: 10px;
+}
+
+.warningMsg {
+    display: block;
+    margin: 1px auto;
+    padding-left: 20px;
+    background-repeat: no-repeat;
+    background-position: left;
+    color: darkgoldenrod;
+    background-image: url('https://i.imgur.com/Z8q7ww7.png');
+    background-size: 16px;
+    border-bottom: 10px;
+}
+
+
+
 
