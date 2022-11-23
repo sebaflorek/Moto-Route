@@ -9,17 +9,22 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import pl.coderslab.motoroute.dto.UserDto;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.UserService;
 
+import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
+import javax.validation.Validator;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
+    private final Validator validator;
 
     /* METODY TYMCZASOWE - START */
     @GetMapping("/createUser")
@@ -50,17 +55,25 @@ public class UserController {
 
     @GetMapping("/register")
     public String registerForm(Model model) {
-        model.addAttribute("user", new User());
-        return "userForm";
+        model.addAttribute("userDto", new UserDto());
+        return "userAddForm";
     }
 
     @PostMapping("/register")
-    public String registerForm(@Valid User user, BindingResult result) {
-        if (result.hasErrors()) {
-            return "userForm";
+    public String registerForm(@Valid UserDto userDto, BindingResult result, Model model) {
+        Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
+        if (!violations.isEmpty()) {
+            for (ConstraintViolation<UserDto> violation : violations) {
+                System.out.println(violation.getPropertyPath() + "<-->" + violation.getMessage());
+            }
         }
-        userService.save(user);
-        return "userForm";
+        if (result.hasErrors()) {
+            model.addAttribute("errorList", violations); // Czy da się inaczej?
+            return "userAddForm";
+        }
+        userService.saveWithDto(userDto);
+        model.addAttribute("registeredUser", userDto.getUsername());
+        return "welcomePage";
     }
 
 

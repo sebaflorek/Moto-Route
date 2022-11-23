@@ -3,6 +3,7 @@ package pl.coderslab.motoroute.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import pl.coderslab.motoroute.dto.UserDto;
 import pl.coderslab.motoroute.entity.Role;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.repository.RoleRepository;
@@ -30,6 +31,18 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void saveWithDto(UserDto userDto) {
+
+        User user = new User();
+        user.setUsername(userDto.getUsername());
+        user.setEmail(userDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setEnabled(1);
+        Role userRole = roleRepository.findByName("ROLE_USER");
+        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
+        userRepository.save(user);
+    }
+
     public void saveAsAdmin(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setEnabled(1);
@@ -41,6 +54,10 @@ public class UserService {
     
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
+    }
+
+    public User findByUserEmail(String email) {
+        return userRepository.findUserByEmail(email);
     }
 
     public User findById(long id) {

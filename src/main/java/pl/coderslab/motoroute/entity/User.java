@@ -20,16 +20,16 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true, length = 60)
-    @NotEmpty(message = "Nazwa użytkownika jest wymagana")
+    //@NotEmpty(message = "Nazwa użytkownika jest wymagana")
     private String username;
 
     @Column(nullable = false)
-    @NotEmpty(message = "Hasło jest wymagane")
+    //@NotEmpty(message = "Hasło jest wymagane")
     private String password;
 
     @Column(nullable = false, unique = true, length = 60)
-    @NotEmpty(message = "Email jest wymagany")
-    @Email(message = "Niepoprawny email")
+    //@NotEmpty(message = "Email jest wymagany")
+    //@Email(message = "Niepoprawny email")
     private String email;
 
     private int enabled;

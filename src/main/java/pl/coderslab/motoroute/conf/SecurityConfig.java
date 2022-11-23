@@ -39,14 +39,14 @@ public class SecurityConfig {
                         "/register",
                         "/login",
                         "/about",
-                        "/routes/all",
+                        "/route/all",
                         "/contact").permitAll()
-                .antMatchers("/dashboard").hasRole("USER")
+                .antMatchers("/route/dashboard").hasRole("USER")
                 .antMatchers("/app/**").hasRole("USER")
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/nie").permitAll() // TEST
                 .antMatchers("/tak").authenticated() // TEST
-                .and().formLogin().defaultSuccessUrl("/dashboard")
+                .and().formLogin().defaultSuccessUrl("/route/dashboard")
                 .and().logout().logoutSuccessUrl("/");
         //.loginPage("/login")
         return http.build();

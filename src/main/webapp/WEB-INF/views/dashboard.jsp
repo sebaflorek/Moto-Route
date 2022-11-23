@@ -3,7 +3,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
-    <title>About</title>
+    <title>Pulpit</title>
     <link rel="stylesheet" href="../../theme/css/style.css">
 </head>
 <body>

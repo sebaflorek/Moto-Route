@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
     <title>User Form</title>
@@ -13,10 +14,14 @@
     <%@ include file="fragments/sideMenu.jsp" %>
     <td class="mainContent">
         <%--CONTENT-START--%>
-        <form:form method="post" modelAttribute="user">
+        <h2>Zarejestruj nowego użytkownika</h2>
+        <form:form method="post" modelAttribute="userDto">
+            <c:if test="${not empty errorList}">
+                <p style="color:red;">Nie można zarejestrować użytkownika!</p>
+            </c:if>
             <label>
-                Nazwa:<br>
-                <form:input path="username" placeholder="Username"/><br>
+                Nazwa użytkownika:<br>
+                <form:input path="username" placeholder="username"/><br>
                 <form:errors path="username" cssClass="errorMsg"/>
             </label><br>
             <label>
@@ -26,10 +31,20 @@
             </label><br>
             <label>
                 Podaj hasło:<br>
-                <form:password path="password" placeholder="Password"/><br>
+                <form:password path="password" placeholder="password"/><br>
                 <form:errors path="password" cssClass="errorMsg"/>
             </label><br>
-            <br><label><input type="submit" value="Zarejestruj"></label>
+            <label>
+                Powtórz hasło:<br>
+                <form:password path="matchingPassword" placeholder="password"/><br>
+                <form:errors path="matchingPassword" cssClass="errorMsg"/>
+            </label><br>
+            <c:if test="${not empty errorList}">
+                Nie można zarejestrować użytkownika:
+                <form:errors cssClass="errorMsg"/>
+            </c:if><br>
+            <label><input type="submit" value="Zarejestruj"></label>
+
         </form:form>
         <%--CONTENT-START--%>
     </td>
