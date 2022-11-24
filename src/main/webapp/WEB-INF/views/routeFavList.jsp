@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>All Routes</title>
+    <title>Favorite Routes</title>
     <link rel="stylesheet" href="../../theme/css/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
     <%@ include file="fragments/sideMenu.jsp" %>
     <td class="mainContent">
         <%--CONTENT-START--%>
-        <h2>Lista dostępnych tras:</h2>
+        <h2>Lista ulubionych tras:</h2>
         <hr>
         <c:forEach var="route" items="${routeList}">
             Trasa: <span class=routeName>${route.name}</span>

@@ -1,7 +1,6 @@
 package pl.coderslab.motoroute.dto;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.URL;
 import pl.coderslab.motoroute.entity.Region;
 import pl.coderslab.motoroute.entity.Type;
 
@@ -20,15 +19,16 @@ public class RouteDto {
     @Size(max = 600)
     private String description;
 
-    @NotNull
+    @NotNull(message = "Wybierz region")
     private Region region;
 
-    @NotNull
+    @NotNull(message = "Wybierz typ")
     private Type type;
 
-    @NotEmpty
     @Size(max = 2000)
-    @Pattern(regexp = "https:\\/\\/maps\\.openrouteservice\\.org\\/\\#\\/directions\\/(\\S+)")
+    @Pattern(regexp = "https:\\/\\/maps\\.openrouteservice\\.org\\/\\#\\/directions\\/(\\S+)", message = "Niepoprawny lub pusty link")
     private String map;
+
+    private long authorId;
 
 }

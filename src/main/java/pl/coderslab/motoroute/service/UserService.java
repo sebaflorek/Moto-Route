@@ -32,7 +32,6 @@ public class UserService {
     }
 
     public void saveWithDto(UserDto userDto) {
-
         User user = new User();
         user.setUsername(userDto.getUsername());
         user.setEmail(userDto.getEmail());

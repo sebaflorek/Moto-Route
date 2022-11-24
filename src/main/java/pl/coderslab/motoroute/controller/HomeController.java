@@ -66,7 +66,7 @@ public class HomeController {
     public String getAllRoutes(Model model) {
         List<Route> routes = routeService.findAll();
         model.addAttribute("routeList", routes);
-        return "routeAll";
+        return "routeList";
     }
 
     @RequestMapping("/contact")

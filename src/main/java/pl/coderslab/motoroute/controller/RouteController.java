@@ -2,6 +2,8 @@ package pl.coderslab.motoroute.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -13,6 +15,8 @@ import pl.coderslab.motoroute.dto.RouteDto;
 import pl.coderslab.motoroute.entity.Region;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.Type;
+import pl.coderslab.motoroute.entity.User;
+import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.RegionService;
 import pl.coderslab.motoroute.service.RouteService;
 import pl.coderslab.motoroute.service.TypeService;
@@ -27,6 +31,7 @@ public class RouteController {
     private final RouteService routeService;
     private final RegionService regionService;
     private final TypeService typeService;
+    private CurrentUser currentUser;
 
     @ModelAttribute("regionList")
     public List<Region> getRegions() {
@@ -38,9 +43,34 @@ public class RouteController {
         return typeService.findAll();
     }
 
+    @ModelAttribute("currentUser")
+    public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
+        this.currentUser = currentUser;
+        return currentUser;
+    }
+
     @RequestMapping("/dashboard") // tymczasowo
     public String showPulpit() {
         return "dashboard";
+    }
+
+    @RequestMapping("/info")
+    public String getMapLinkInfo() {
+        return "routeInstruction";
+    }
+
+    @GetMapping("/my-list")
+    public String getMyRoutesList(Model model) {
+        List<Route> routes = routeService.findAllByAuthorId(currentUser.getUser().getId());
+        model.addAttribute("routeList", routes);
+        return "routeMyList";
+    }
+
+    @GetMapping("/fav-list")
+    public String getMyFavRoutesList(Model model) {
+        List<Route> favouriteRoutes = currentUser.getUser().getFavouriteRoutes();
+        model.addAttribute("routeList", favouriteRoutes);
+        return "routeFavList";
     }
 
     @GetMapping("/add")
@@ -54,6 +84,7 @@ public class RouteController {
         if (result.hasErrors()) {
             return "routeForm";
         }
-        return "redirect:/app/route/dashboard";
+        routeService.saveWithDto(routeDto);
+        return "redirect:/app/route/owner-list";
     }
 }
