@@ -1,4 +1,4 @@
-package pl.coderslab.motoroute.security;
+package pl.coderslab.motoroute.validation;
 
 import lombok.RequiredArgsConstructor;
 import pl.coderslab.motoroute.dto.UserDto;
@@ -18,6 +18,13 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
 
     @Override
     public boolean isValid(UserDto userDto, ConstraintValidatorContext constraintValidatorContext) {
-        return userService.findByUsername(userDto.getUsername()) == null;
+        if (userService.findByUsername(userDto.getUsername()) != null) {
+            constraintValidatorContext
+                    .buildConstraintViolationWithTemplate("{invalid.username.username-unique}")
+                    .addPropertyNode("username")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
     }
 }

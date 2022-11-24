@@ -1,4 +1,4 @@
-package pl.coderslab.motoroute.security;
+package pl.coderslab.motoroute.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -9,7 +9,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = PasswordMatchesValidator.class)
 @Documented
 public @interface PasswordMatches {
-    String message() default "Passwords don't match";
+    String message() default "{invalid.password.confirm-password}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

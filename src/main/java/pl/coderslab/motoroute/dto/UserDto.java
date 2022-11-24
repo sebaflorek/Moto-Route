@@ -1,9 +1,9 @@
 package pl.coderslab.motoroute.dto;
 
 import lombok.Data;
-import pl.coderslab.motoroute.security.PasswordMatches;
-import pl.coderslab.motoroute.security.UniqueEmail;
-import pl.coderslab.motoroute.security.UniqueUsername;
+import pl.coderslab.motoroute.validation.PasswordMatches;
+import pl.coderslab.motoroute.validation.UniqueEmail;
+import pl.coderslab.motoroute.validation.UniqueUsername;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -11,9 +11,9 @@ import javax.validation.constraints.Size;
 
 
 @Data
-@PasswordMatches(message = "Hasło nie pasuje")
-@UniqueEmail(message = "Podany email już istnieje")
-@UniqueUsername(message = "Podany użytkownik już istnieje")
+@PasswordMatches
+@UniqueEmail
+@UniqueUsername
 public class UserDto {
 
     @NotEmpty(message = "Nazwa użytkownika jest wymagana")

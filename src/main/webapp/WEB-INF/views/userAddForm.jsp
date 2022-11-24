@@ -16,9 +16,7 @@
         <%--CONTENT-START--%>
         <h2>Zarejestruj nowego użytkownika</h2>
         <form:form method="post" modelAttribute="userDto">
-            <c:if test="${not empty errorList}">
-                <p style="color:red;">Nie można zarejestrować użytkownika!</p>
-            </c:if>
+
             <label>
                 Nazwa użytkownika:<br>
                 <form:input path="username" placeholder="username"/><br>
@@ -39,11 +37,10 @@
                 <form:password path="matchingPassword" placeholder="password"/><br>
                 <form:errors path="matchingPassword" cssClass="errorMsg"/>
             </label><br>
-            <c:if test="${not empty errorList}">
-                Nie można zarejestrować użytkownika:
-                <form:errors cssClass="errorMsg"/>
-            </c:if><br>
             <label><input type="submit" value="Zarejestruj"></label>
+            <c:if test="${not empty errorList}">
+                <p class="errorMsg">Nie można zarejestrować użytkownika!</p>
+            </c:if>
 
         </form:form>
         <%--CONTENT-START--%>

@@ -1,4 +1,4 @@
-package pl.coderslab.motoroute.security;
+package pl.coderslab.motoroute.validation;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -6,10 +6,10 @@ import java.lang.annotation.*;
 
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueEmailValidator.class)
+@Constraint(validatedBy = UniqueUsernameValidator.class)
 @Documented
-public @interface UniqueEmail {
-    String message() default "Email already registered";
+public @interface UniqueUsername {
+    String message() default "{invalid.username.username-unique}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

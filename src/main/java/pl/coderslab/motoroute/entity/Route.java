@@ -33,6 +33,7 @@ public class Route {
     @JoinColumn(name = "type_id")
     private Type type;
 
+    @Column()
     private int popularity;
 
     private int likes;

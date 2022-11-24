@@ -1,4 +1,4 @@
-package pl.coderslab.motoroute.security;
+package pl.coderslab.motoroute.validation;
 
 import lombok.RequiredArgsConstructor;
 import pl.coderslab.motoroute.dto.UserDto;
@@ -17,6 +17,13 @@ public class UniqueEmailValidator implements ConstraintValidator<UniqueEmail, Us
 
     @Override
     public boolean isValid(UserDto userDto, ConstraintValidatorContext constraintValidatorContext) {
-        return userService.findByUserEmail(userDto.getEmail()) == null;
+        if (userService.findByUserEmail(userDto.getEmail()) != null) {
+            constraintValidatorContext
+                    .buildConstraintViolationWithTemplate("{invalid.email.email-unique}")
+                    .addPropertyNode("email")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
     }
 }

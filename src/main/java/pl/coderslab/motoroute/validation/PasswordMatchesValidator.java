@@ -1,4 +1,4 @@
-package pl.coderslab.motoroute.security;
+package pl.coderslab.motoroute.validation;
 
 import pl.coderslab.motoroute.dto.UserDto;
 
@@ -13,6 +13,13 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
 
     @Override
     public boolean isValid(UserDto userDto, ConstraintValidatorContext constraintValidatorContext) {
-        return userDto.getPassword().equals(userDto.getMatchingPassword());
+        if (!userDto.getPassword().equals(userDto.getMatchingPassword())) {
+            constraintValidatorContext
+                    .buildConstraintViolationWithTemplate("{invalid.password.confirm-password}")
+                    .addPropertyNode("matchingPassword")
+                    .addConstraintViolation();
+            return false;
+        }
+        return true;
     }
 }
