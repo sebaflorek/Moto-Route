@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Moto Route</title>
-    <link rel="stylesheet" href="../../theme/css/style.css">
+    <title>Route details</title>
+    <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
@@ -12,12 +12,10 @@
     <%@ include file="fragments/sideMenu.jsp" %>
     <td class="mainContent">
         <%--CONTENT-START--%>
-        <h2>Skąd wziąć link do mapy?</h2>
-            <p>Żeby dodać mapę do swojego profilu wykonaj poniższe kroki.</p>
-        <ul>
-            <li></li>
-        </ul>
-        <%--CONTENT-START--%>
+        <h2>TRASA: <span>${route.name.toUpperCase()}</span></h2>
+        <hr>
+
+        <%--CONTENT-STOP--%>
     </td>
 </table>
 

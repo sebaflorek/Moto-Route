@@ -3,7 +3,7 @@
 <html>
 <head>
     <title>About</title>
-    <link rel="stylesheet" href="../../theme/css/style.css">
+    <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>

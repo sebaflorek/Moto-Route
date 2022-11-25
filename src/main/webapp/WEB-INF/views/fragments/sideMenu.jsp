@@ -6,10 +6,9 @@
 <button onclick="location.href='<c:url value="/app/route/my-list"/>'" type="button">MOJE TRASY</button><br><br>
 <button onclick="location.href='<c:url value="/app/route/add"/>'" type="button">DODAJ TRASĘ</button><br><br>
 <button onclick="location.href='<c:url value="/app/route/fav-list"/>'" type="button">ULUBIONE TRASY</button><br><br>
-<button onclick="location.href='<c:url value="/"/>'" type="button">WYCIECZKI</button><br><br>
-<button onclick="location.href='<c:url value="/"/>'" type="button">EDYTUJ PROFIL</button><br><br>
-<button onclick="location.href='<c:url value="/"/>'" type="button">ZMIEŃ HASŁO</button><br><br>
+<button onclick="location.href='<c:url value="/app/maintenance"/>'" type="button">WYCIECZKI</button><br><br>
+<button onclick="location.href='<c:url value="/app/maintenance"/>'" type="button">EDYTUJ PROFIL</button><br><br>
+<button onclick="location.href='<c:url value="/app/maintenance"/>'" type="button">ZMIEŃ HASŁO</button><br><br>
 <button onclick="location.href='<c:url value="/logout"/>'" type="button">WYLOGUJ</button>
 </td>
 </sec:authorize>
-<%--<if>--%>

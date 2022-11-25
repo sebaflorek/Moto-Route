@@ -3,7 +3,8 @@
 <html>
 <head>
     <title>Moto Route</title>
-    <link rel="stylesheet" href="../../theme/css/style.css">
+    <%--<link rel="stylesheet" href="../../theme/css/style.css">--%>
+    <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
@@ -23,7 +24,7 @@
         <p>Podobała Ci się trasa? Polub i udostępnij trasę innym</p>
         <h3>Zaplanuj wycieczkę</h3>
         <p>Razem z Moto Route zaplanuj kilkudniową wycieczkę. Wybierz trasy i dodaj je do swojej wycieczki.</p>
-        <%--CONTENT-START--%>
+        <%--CONTENT-STOP--%>
     </td>
 </table>
 

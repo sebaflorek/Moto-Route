@@ -2,24 +2,18 @@ package pl.coderslab.motoroute.controller;
 
 
 import lombok.RequiredArgsConstructor;
-import org.hibernate.Hibernate;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.RouteDto;
-import pl.coderslab.motoroute.entity.Region;
-import pl.coderslab.motoroute.entity.Route;
-import pl.coderslab.motoroute.entity.Type;
-import pl.coderslab.motoroute.entity.User;
+import pl.coderslab.motoroute.entity.*;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.RegionService;
 import pl.coderslab.motoroute.service.RouteService;
 import pl.coderslab.motoroute.service.TypeService;
+import pl.coderslab.motoroute.service.UserService;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -31,8 +25,10 @@ public class RouteController {
     private final RouteService routeService;
     private final RegionService regionService;
     private final TypeService typeService;
+    private final UserService userService;
     private CurrentUser currentUser;
 
+    /* ================= MODEL ATTRIBUTES ================= */
     @ModelAttribute("regionList")
     public List<Region> getRegions() {
         return regionService.findAll();
@@ -49,42 +45,60 @@ public class RouteController {
         return currentUser;
     }
 
-    @RequestMapping("/dashboard") // tymczasowo
-    public String showPulpit() {
-        return "dashboard";
-    }
-
-    @RequestMapping("/info")
-    public String getMapLinkInfo() {
-        return "routeInstruction";
+    /* ================= ROUTES VIEWING ================= */
+    @RequestMapping("/dashboard")
+    public String showPulpit(Model model) {
+        long currentUserId = currentUser.getUser().getId();
+        Route latestRoute = routeService.findLatestByAuthorId(currentUserId);
+        int routesNum = routeService.countAllByAuthorId(currentUserId);
+        model.addAttribute("latestRoute", latestRoute);
+        model.addAttribute("latestTrip", null);
+        model.addAttribute("routesNum", routesNum);
+        model.addAttribute("tripsNum", null);
+        return "app-dashboard";
     }
 
     @GetMapping("/my-list")
     public String getMyRoutesList(Model model) {
         List<Route> routes = routeService.findAllByAuthorId(currentUser.getUser().getId());
         model.addAttribute("routeList", routes);
-        return "routeMyList";
+        return "app-routeMyList";
     }
 
     @GetMapping("/fav-list")
     public String getMyFavRoutesList(Model model) {
-        List<Route> favouriteRoutes = currentUser.getUser().getFavouriteRoutes();
+        List<Route> favouriteRoutes = userService.findById(currentUser.getUser().getId()).getFavouriteRoutes();
         model.addAttribute("routeList", favouriteRoutes);
-        return "routeFavList";
+        return "app-routeFavList";
     }
 
+    @GetMapping("/details/{id}")
+    public String routeDetails(Model model, @PathVariable Long id) {
+        model.addAttribute("route", routeService.findById(id));
+        return "app-routeDetails";
+    }
+
+    /* ================= ROUTES MANAGEMENT ================= */
     @GetMapping("/add")
     public String routeForm(Model model) {
         model.addAttribute("routeDto", new RouteDto());
-        return "routeForm";
+        return "app-routeForm";
     }
 
     @PostMapping("/add")
     public String addRoute(@Valid RouteDto routeDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "routeForm";
+            return "app-routeForm";
         }
         routeService.saveWithDto(routeDto);
         return "redirect:/app/route/owner-list";
     }
+
+    /* ================= ADDITIONAL VIEWS ================= */
+    @RequestMapping("/info")
+    public String getMapLinkInfo() {
+        return "app-routeInstruction";
+    }
+
+
 }

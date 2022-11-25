@@ -43,7 +43,7 @@ public class HomeController {
     @PostMapping("/register")
     public String registerForm(@Valid UserDto userDto, BindingResult result, Model model) {
         Set<ConstraintViolation<UserDto>> violations = validator.validate(userDto);
-        if (!violations.isEmpty()) { // tymczasowo dla identyfikacji propertyPath
+        if (!violations.isEmpty()) { // temporary
             for (ConstraintViolation<UserDto> violation : violations) {
                 System.out.println(violation.getPropertyPath() + "<-->" + violation.getMessage());
             }
@@ -66,7 +66,7 @@ public class HomeController {
     public String getAllRoutes(Model model) {
         List<Route> routes = routeService.findAll();
         model.addAttribute("routeList", routes);
-        return "routeList";
+        return "routes";
     }
 
     @RequestMapping("/contact")
@@ -98,6 +98,12 @@ public class HomeController {
     public String admin(@AuthenticationPrincipal CurrentUser customUser) {
         User entityUser = customUser.getUser();
         return "Hello " + entityUser.getUsername();
+    }
+
+    /* ================= ADDITIONAL VIEWS ================= */
+    @RequestMapping("/app/maintenance")
+    public String showMaintenance() {
+        return "app-maintenance";
     }
 
 }

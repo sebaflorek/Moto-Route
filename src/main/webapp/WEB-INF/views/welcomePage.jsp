@@ -3,7 +3,7 @@
 <html>
 <head>
   <title>Welcome</title>
-  <link rel="stylesheet" href="../../theme/css/style.css">
+  <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
@@ -14,7 +14,7 @@
     <%--CONTENT-START--%>
     <h2>Witaj <span class="dashCol">${registeredUser}</span> na platformie Moto Route!</h2>
     <p><a href='<c:url value="/login"/>'>Zaloguj się</a>, by w pełni zacząć korzystać z serwisu.</p>
-    <%--CONTENT-START--%>
+    <%--CONTENT-STOP--%>
   </td>
 </table>
 

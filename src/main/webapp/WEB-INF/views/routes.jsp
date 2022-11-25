@@ -2,8 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Favorite Routes</title>
-    <link rel="stylesheet" href="../../theme/css/style.css">
+    <title>All Routes</title>
+    <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
@@ -12,7 +12,7 @@
     <%@ include file="fragments/sideMenu.jsp" %>
     <td class="mainContent">
         <%--CONTENT-START--%>
-        <h2>Lista ulubionych tras:</h2>
+        <h2>TRASY</h2>
         <hr>
         <c:forEach var="route" items="${routeList}">
             Trasa: <span class=routeName>${route.name}</span>
@@ -26,25 +26,25 @@
                         Rodzaj trasy: <b>${route.type.name}</b><br>
                         Lokalizacja: <b>${route.region.name}</b><br>
                         Długość trasy: <b>${route.distance}km</b><br>
-                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/details/${route.id}"/>'" type="button">
                             Szczegóły
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/fav-add/${route.id}"/>'" type="button">
                             Dodaj do ulubionych
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/download/${route.id}"/>'" type="button">
                             Pobierz
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/send/${route.id}"/>'" type="button">
                             Wyślij
                         </button>
-                        <br>
-                        <button onclick="location.href='<c:url value="/route/all"/>'" type="button">
-                            Polub
-                        </button>
+                            <%--<br>--%>
+                            <%--<button onclick="location.href='<c:url value="/route/all"/>'" type="button">--%>
+                            <%--Polub--%>
+                            <%--</button>--%>
                         <br>
                         <br>
                         Popularność: <b>${route.popularity}</b><br>
@@ -54,7 +54,7 @@
             </table>
             <hr>
         </c:forEach>
-        <%--CONTENT-START--%>
+        <%--CONTENT-STOP--%>
     </td>
 </table>
 

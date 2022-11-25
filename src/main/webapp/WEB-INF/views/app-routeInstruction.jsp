@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Contact</title>
+    <title>Moto Route</title>
     <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
@@ -11,11 +11,13 @@
 <table style="width: 100%">
     <%@ include file="fragments/sideMenu.jsp" %>
     <td class="mainContent">
-        <h2>Dane kontaktowe</h2>
-        <p>Potrzebujesz pomocy lub chcesz podzielić się Swoją opinią?</p>
-        <p>Zapraszamy do kontaktu:</p>
-        <h3>Email: moto.route.pl@gmail.com</h3>
-
+        <%--CONTENT-START--%>
+        <h2>Skąd wziąć link do mapy?</h2>
+            <p>Żeby dodać mapę do swojego profilu wykonaj poniższe kroki.</p>
+        <ul>
+            <li></li>
+        </ul>
+        <%--CONTENT-STOP--%>
     </td>
 </table>
 

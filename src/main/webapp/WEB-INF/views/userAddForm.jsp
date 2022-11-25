@@ -5,7 +5,7 @@
 <html>
 <head>
     <title>User Form</title>
-    <link rel="stylesheet" href="../../theme/css/style.css">
+    <link rel="stylesheet" href='<c:url value="/theme/css/style.css"/>'>
 </head>
 <body>
 <%@ include file="fragments/header.jsp" %>
@@ -43,7 +43,7 @@
             </c:if>
 
         </form:form>
-        <%--CONTENT-START--%>
+        <%--CONTENT-STOP--%>
     </td>
 </table>
 

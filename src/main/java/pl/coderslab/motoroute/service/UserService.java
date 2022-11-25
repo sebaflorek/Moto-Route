@@ -1,6 +1,7 @@
 package pl.coderslab.motoroute.service;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.UserDto;
@@ -60,7 +61,9 @@ public class UserService {
     }
 
     public User findById(long id) {
-        return userRepository.findById(id).orElse(null);
+        User user = userRepository.findById(id).orElse(null);
+        addRoutesToUser(user);
+        return user;
     }
 
     public List<User> findAll() {
@@ -69,6 +72,10 @@ public class UserService {
 
     public void deleteById(long id) {
         userRepository.deleteById(id);
+    }
+
+    private void addRoutesToUser(User user) {
+        Hibernate.initialize(user.getFavouriteRoutes());
     }
 
 

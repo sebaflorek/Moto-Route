@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.RouteDto;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.repository.RouteRepository;
-import pl.coderslab.motoroute.security.CurrentUser;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -38,20 +37,28 @@ public class RouteService {
         return routeRepository.findById(id).orElse(null);
     }
 
+    public Route findLatestByAuthorId(long authorId) {
+        return routeRepository.findFirstRouteByAuthorIdOrderByCreatedDesc(authorId);
+    }
+
     public List<Route> findAll() {
         return routeRepository.findAll();
     }
+
     public List<Route> findAllByAuthorId(long authorId) {
         return routeRepository.findRoutesByAuthorId(authorId);
     }
 
-
-//    public void update(Route route) {
-//        routeRepository.save(route);
-//    }
+    public void update(Route route) {
+        routeRepository.save(route);
+    }
 
     public void deleteById(long id) {
         routeRepository.deleteById(id);
+    }
+
+    public int countAllByAuthorId(long authorId) {
+        return routeRepository.countAllByAuthorId(authorId);
     }
 
 
