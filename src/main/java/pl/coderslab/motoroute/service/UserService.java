@@ -4,8 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.hibernate.Hibernate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import pl.coderslab.motoroute.dto.UserDto;
+import pl.coderslab.motoroute.dto.UserCreateDto;
 import pl.coderslab.motoroute.entity.Role;
+import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.repository.RoleRepository;
 import pl.coderslab.motoroute.repository.UserRepository;
@@ -25,33 +26,32 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void save(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(1);
-        Role userRole = roleRepository.findByName("ROLE_USER");
-        user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         userRepository.save(user);
     }
 
-    public void saveWithDto(UserDto userDto) {
+    public void saveAsUserWithDto(UserCreateDto userCreateDto) {
         User user = new User();
-        user.setUsername(userDto.getUsername());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setUsername(userCreateDto.getUsername());
+        user.setEmail(userCreateDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_USER");
         user.setRoles(new HashSet<>(Collections.singletonList(userRole)));
         userRepository.save(user);
     }
 
-    public void saveAsAdmin(User user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    public void saveAsAdminWithDto(UserCreateDto userCreateDto) {
+        User user = new User();
+        user.setUsername(userCreateDto.getUsername());
+        user.setEmail(userCreateDto.getEmail());
+        user.setPassword(passwordEncoder.encode(userCreateDto.getPassword()));
         user.setEnabled(1);
         Role userRole = roleRepository.findByName("ROLE_USER");
         Role adminRole = roleRepository.findByName("ROLE_ADMIN");
         user.setRoles(new HashSet<>(Arrays.asList(userRole, adminRole)));
         userRepository.save(user);
     }
-    
+
     public User findByUsername(String username) {
         return userRepository.findByUsername(username);
     }
@@ -72,6 +72,12 @@ public class UserService {
 
     public void deleteById(long id) {
         userRepository.deleteById(id);
+    }
+
+    public void addFavRouteToUser(long userId, Route route) {
+        User user = findById(userId);
+        user.getFavouriteRoutes().add(route);
+        userRepository.save(user);
     }
 
     private void addRoutesToUser(User user) {

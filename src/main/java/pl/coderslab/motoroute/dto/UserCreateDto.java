@@ -14,20 +14,19 @@ import javax.validation.constraints.Size;
 @PasswordMatches
 @UniqueEmail
 @UniqueUsername
-public class UserDto {
+public class UserCreateDto {
 
-    @NotEmpty(message = "Nazwa użytkownika jest wymagana")
-    @Size(min = 3, max = 20, message = "Nazwa musi zawierać 3-20 znaków")
+    @NotEmpty
+    @Size(min = 3, max = 20, message = "{invalid.username.username-length}")
     private String username;
 
-    @NotEmpty(message = "Email jest wymagany")
-    @Email(message = "Niepoprawny email")
+    @NotEmpty
+    @Email
     private String email;
 
-    @NotEmpty(message = "Hasło jest wymagane")
+    @NotEmpty
     private String password;
 
-    @NotEmpty(message = "Potwierdź hasło")
-//    @PasswordMatches(message = "Hasło nie pasuje")
+    @NotEmpty
     private String matchingPassword;
 }

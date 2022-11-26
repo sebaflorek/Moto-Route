@@ -18,13 +18,13 @@
         <table>
             <tr>
                 <td>
-                    <button onclick="location.href='<c:url value="/pulpit"/>'" type="button">+ TRASĘ</button>
+                    <button onclick="location.href='<c:url value="/app/route/add"/>'" type="button">+ TRASĘ</button>
                 </td>
                 <td>
-                    <button onclick="location.href='<c:url value="/pulpit"/>'" type="button">+ WYCIECZKĘ</button>
+                    <button onclick="location.href='<c:url value="/app/trip/add"/>'" type="button">+ WYCIECZKĘ</button>
                 </td>
                 <td>
-                    <button onclick="location.href='<c:url value="/pulpit"/>'" type="button">+ TRASĘ DO WYCIECZKI
+                    <button onclick="location.href='<c:url value="/app/trip/add-route"/>'" type="button">+ TRASĘ DO WYCIECZKI
                     </button>
                 </td>
             </tr>
@@ -55,9 +55,9 @@
                             Edytuj
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/delete/${latestRoute.id}"/>'" type="button">
-                            Usuń
-                        </button>
+                        <a href='<c:url value="/app/route/delete/${latestRoute.id}"/>'>
+                            <button onclick="return confirm('Czy na pewno usunąć Trasę?')" type="submit">Usuń</button>
+                        </a>
                         <br>
                         <button onclick="location.href='<c:url value="/app/route/download/${latestRoute.id}"/>'" type="button">
                             Pobierz

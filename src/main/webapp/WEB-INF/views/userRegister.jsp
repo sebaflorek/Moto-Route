@@ -15,7 +15,7 @@
     <td class="mainContent">
         <%--CONTENT-START--%>
         <h2>Zarejestruj nowego użytkownika</h2>
-        <form:form method="post" modelAttribute="userDto">
+        <form:form method="post" modelAttribute="userCreateDto">
 
             <label>
                 Nazwa użytkownika:<br>

@@ -2,7 +2,7 @@ package pl.coderslab.motoroute.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.coderslab.motoroute.dto.RouteDto;
+import pl.coderslab.motoroute.dto.RouteCreateDto;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.repository.RouteRepository;
 
@@ -19,17 +19,17 @@ public class RouteService {
         routeRepository.save(route);
     }
 
-    public void saveWithDto(RouteDto routeDto) {
+    public void saveWithDto(RouteCreateDto routeCreateDto) {
         Route route = new Route();
-        route.setName(routeDto.getName());
-        route.setDistance(routeDto.getDistance());
-        route.setDescription(routeDto.getDescription());
-        route.setRegion(routeDto.getRegion());
-        route.setType(routeDto.getType());
-        route.setMap(routeDto.getMap());
+        route.setName(routeCreateDto.getName());
+        route.setDistance(routeCreateDto.getDistance());
+        route.setDescription(routeCreateDto.getDescription());
+        route.setRegion(routeCreateDto.getRegion());
+        route.setType(routeCreateDto.getType());
+        route.setMap(routeCreateDto.getMap());
         route.setPopularity(0);
         route.setLikes(0);
-        route.setAuthorId(routeDto.getAuthorId());
+        route.setAuthorId(routeCreateDto.getAuthorId());
         routeRepository.save(route);
     }
 
@@ -60,6 +60,7 @@ public class RouteService {
     public int countAllByAuthorId(long authorId) {
         return routeRepository.countAllByAuthorId(authorId);
     }
+
 
 
 }

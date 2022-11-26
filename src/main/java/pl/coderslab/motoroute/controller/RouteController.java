@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.motoroute.dto.RouteDto;
+import pl.coderslab.motoroute.dto.RouteCreateDto;
 import pl.coderslab.motoroute.entity.*;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.RegionService;
@@ -81,17 +81,62 @@ public class RouteController {
     /* ================= ROUTES MANAGEMENT ================= */
     @GetMapping("/add")
     public String routeForm(Model model) {
-        model.addAttribute("routeDto", new RouteDto());
-        return "app-routeForm";
+        model.addAttribute("routeCreateDto", new RouteCreateDto());
+        return "app-routeAdd";
     }
 
     @PostMapping("/add")
-    public String addRoute(@Valid RouteDto routeDto, BindingResult result) {
+    public String addRoute(@Valid RouteCreateDto routeCreateDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "app-routeForm";
+            return "app-routeAdd";
         }
-        routeService.saveWithDto(routeDto);
-        return "redirect:/app/route/owner-list";
+        routeService.saveWithDto(routeCreateDto);
+        return "redirect:/app/route/dashboard";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String editRoute(Model model, @PathVariable Long id) {
+        Route route = routeService.findById(id);
+        if (route.getAuthorId() == currentUser.getUser().getId()) {
+            model.addAttribute("route", route);
+            return "app-routeEdit";
+        }
+        return "error-illegal";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String updateRoute(@Valid Route route, BindingResult result) {
+        if (result.hasErrors()) {
+            return "app-routeEdit";
+        }
+        if (route.getAuthorId() == currentUser.getUser().getId()) {
+            routeService.save(route);
+            return "redirect:/app/route/my-list";
+        }
+        return "error-illegal";
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String deleteRoute(@PathVariable Long id) {
+        Route route = routeService.findById(id);
+        if (route.getAuthorId() == currentUser.getUser().getId()) {
+            routeService.deleteById(id);
+            return "redirect:/app/route/my-list";
+        }
+        return "error-illegal";
+    }
+
+    @RequestMapping("/{id}/fav-add")
+    public String addRouteToFavorite(@PathVariable Long id) {
+        Route route = routeService.findById(id);
+        userService.addFavRouteToUser(currentUser.getUser().getId(), route);
+        return "redirect:/app/route/fav-list";
+    }
+
+    @RequestMapping("/{id}/fav-del")
+    public String delRouteFromFavorite(@PathVariable Long id) {
+
+        return "redirect:/app/route/fav-list";
     }
 
     /* ================= ADDITIONAL VIEWS ================= */

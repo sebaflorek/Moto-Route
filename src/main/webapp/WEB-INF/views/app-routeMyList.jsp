@@ -34,11 +34,12 @@
                             Edytuj
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/delete/${route.id}"/>'" type="button">
-                            Usuń
-                        </button>
+                        <a href='<c:url value="/app/route/delete/${route.id}"/>'>
+                            <button onclick="return confirm('Czy na pewno usunąć Trasę?')" type="submit">Usuń</button>
+                        </a>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/download/${route.id}"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/download/${route.id}"/>'"
+                                type="button">
                             Pobierz
                         </button>
                         <br>

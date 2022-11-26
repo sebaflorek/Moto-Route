@@ -20,16 +20,12 @@ public class User {
     private long id;
 
     @Column(nullable = false, unique = true, length = 60)
-    //@NotEmpty(message = "Nazwa użytkownika jest wymagana")
     private String username;
 
     @Column(nullable = false)
-    //@NotEmpty(message = "Hasło jest wymagane")
     private String password;
 
     @Column(nullable = false, unique = true, length = 60)
-    //@NotEmpty(message = "Email jest wymagany")
-    //@Email(message = "Niepoprawny email")
     private String email;
 
     private int enabled;
@@ -40,7 +36,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "users_routes",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "route_id"))

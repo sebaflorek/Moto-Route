@@ -32,6 +32,14 @@ td.mainContent {
     vertical-align: top
 }
 
+.myButton {
+}
+
+.myButton:hover {
+    border-radius: 3px;
+    background-color: darkorange;
+}
+
 /*ROUTE CONTENT*/
 
 .routeName {
@@ -43,6 +51,13 @@ td.mainContent {
     width: 100%;
     height: 100%;
     border: none;
+    border-radius: 10px;
+}
+
+#bigFrame {
+    width: 80%;
+    height: 600px;
+    border: 2px solid darkorange;
     border-radius: 10px;
 }
 
@@ -59,6 +74,21 @@ td.mainContent {
 .routeInfo button:hover {
     border-radius: 3px;
     background-color: darkorange;
+}
+
+.details-table {
+    border-collapse: collapse;
+}
+
+.details-table th {
+    border: 1px solid #aaa;
+    background: darkorange;
+    padding: 10px;
+}
+
+.details-table td {
+    border: 1px solid #aaa;
+    padding: 10px;
 }
 
 /*ERRORS*/

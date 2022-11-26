@@ -1,14 +1,14 @@
 package pl.coderslab.motoroute.validation;
 
 import lombok.RequiredArgsConstructor;
-import pl.coderslab.motoroute.dto.UserDto;
+import pl.coderslab.motoroute.dto.UserCreateDto;
 import pl.coderslab.motoroute.service.UserService;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @RequiredArgsConstructor
-public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, UserDto> {
+public class UniqueUsernameValidator implements ConstraintValidator<UniqueUsername, UserCreateDto> {
     private final UserService userService;
 
 
@@ -17,8 +17,8 @@ public class UniqueUsernameValidator implements ConstraintValidator<UniqueUserna
     }
 
     @Override
-    public boolean isValid(UserDto userDto, ConstraintValidatorContext constraintValidatorContext) {
-        if (userService.findByUsername(userDto.getUsername()) != null) {
+    public boolean isValid(UserCreateDto userCreateDto, ConstraintValidatorContext constraintValidatorContext) {
+        if (userService.findByUsername(userCreateDto.getUsername()) != null) {
             constraintValidatorContext
                     .buildConstraintViolationWithTemplate("{invalid.username.username-unique}")
                     .addPropertyNode("username")

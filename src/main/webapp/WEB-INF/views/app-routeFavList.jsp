@@ -30,7 +30,7 @@
                             Szczegóły
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/fav-del/${route.id}"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/${route.id}/fav-del"/>'" type="button">
                             Usuń z ulubionych
                         </button>
                         <br>
