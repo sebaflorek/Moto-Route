@@ -61,6 +61,22 @@ public class RouteService {
         return routeRepository.countAllByAuthorId(authorId);
     }
 
+    public void deleteRoutesFromUsersFavorites(long routeId) {
+        routeRepository.deleteRoutesFromUsersFavorites(routeId);
+    }
+
+    public void routeLikePlusOne(long routeId) {
+        Route route = findById(routeId);
+        route.setLikes(route.getLikes() + 1);
+        routeRepository.save(route);
+    }
+
+    public void routeLikeMinusOne(long routeId) {
+        Route route = findById(routeId);
+        route.setLikes(route.getLikes() - 1);
+        routeRepository.save(route);
+    }
+
 
 
 }

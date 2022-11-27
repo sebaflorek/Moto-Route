@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = Route.TABLE_NAME)
@@ -53,6 +54,9 @@ public class Route {
     private LocalDateTime updated;
 
     private long authorId;
+
+    //@ManyToMany(mappedBy = "favouriteRoutes", cascade = CascadeType.ALL)
+    //private List<User> favoriteUsers;
 
     @PrePersist
     public void prePersist() {

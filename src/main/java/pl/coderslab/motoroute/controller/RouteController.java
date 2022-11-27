@@ -120,6 +120,7 @@ public class RouteController {
     public String deleteRoute(@PathVariable Long id) {
         Route route = routeService.findById(id);
         if (route.getAuthorId() == currentUser.getUser().getId()) {
+            routeService.deleteRoutesFromUsersFavorites(id); // czy jest inny sposób?
             routeService.deleteById(id);
             return "redirect:/app/route/my-list";
         }
@@ -130,12 +131,15 @@ public class RouteController {
     public String addRouteToFavorite(@PathVariable Long id) {
         Route route = routeService.findById(id);
         userService.addFavRouteToUser(currentUser.getUser().getId(), route);
+        routeService.routeLikePlusOne(id);
         return "redirect:/app/route/fav-list";
     }
 
     @RequestMapping("/{id}/fav-del")
     public String delRouteFromFavorite(@PathVariable Long id) {
-
+        Route route = routeService.findById(id);
+        userService.delFavRouteFromUser(currentUser.getUser().getId(), route);
+        routeService.routeLikeMinusOne(id);
         return "redirect:/app/route/fav-list";
     }
 

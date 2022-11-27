@@ -80,6 +80,12 @@ public class UserService {
         userRepository.save(user);
     }
 
+    public void delFavRouteFromUser(long userId, Route route) {
+        User user = findById(userId);
+        user.getFavouriteRoutes().remove(route);
+        userRepository.save(user);
+    }
+
     private void addRoutesToUser(User user) {
         Hibernate.initialize(user.getFavouriteRoutes());
     }
