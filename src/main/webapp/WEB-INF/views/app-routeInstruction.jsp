@@ -13,10 +13,15 @@
     <td class="mainContent">
         <%--CONTENT-START--%>
         <h2>Skąd wziąć link do mapy?</h2>
-            <p>Żeby dodać mapę do swojego profilu wykonaj poniższe kroki.</p>
+        <p>Żeby dodać mapę do swojego profilu wykonaj poniższe kroki:</p>
         <ul>
-            <li></li>
+            <li>Wejdź na <a href="https://maps.openrouteservice.org">Open Route Service</a> lub skorzystaj z okna na
+                stronie dodawania trasy.
+            </li>
+            <li>Zaprojektuj swoją trasę i kliknij SHARE.</li>
+            <li>Skopiuj i wklej link do Swojej mapy w odpowiednie pole formularza dodawania nowej trasy.</li>
         </ul>
+        Gotowe!
         <%--CONTENT-STOP--%>
     </td>
 </table>

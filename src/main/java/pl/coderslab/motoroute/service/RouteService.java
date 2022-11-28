@@ -3,6 +3,7 @@ package pl.coderslab.motoroute.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.RouteCreateDto;
+import pl.coderslab.motoroute.emails.EmailService;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.repository.RouteRepository;
 
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RouteService {
     private final RouteRepository routeRepository;
+    private final EmailService emailService;
 
     public void save(Route route) {
         routeRepository.save(route);
@@ -77,6 +79,23 @@ public class RouteService {
         routeRepository.save(route);
     }
 
+    public void sendRouteViaEmail(String email, String receiverName, Route route) {
+        String title = "Moto Route: Trasa";
+        StringBuilder message = new StringBuilder();
+        message
+                .append("Cześć " + receiverName.toUpperCase() + ",\n")
+                .append("\nDziękujemy za skorzystanie z serwisu Moto Route. Poniżej szczegóły wybranej trasy.\n")
+                .append("\nTrasa: " + route.getName().toUpperCase() + "\n")
+                .append("Lokalizacja: " + route.getRegion().getName() + "\n")
+                .append("Typ: " + route.getType().getName() + "\n")
+                .append("Długość: " + route.getDistance() + "km\n")
+                .append("Mapa: " + route.getMap() + "\n")
+                .append("\nPozdrawiamy,\n")
+                .append("Zespół Moto Route");
+
+        emailService.sendSimpleEmail(email, title, message.toString());
+
+    }
 
 
 }
