@@ -183,6 +183,7 @@ public class RouteController {
     private String sendEmail(String email, String receiverName, Route route, Model model) {
         try {
             routeService.sendRouteViaEmail(email, receiverName, route);
+            routeService.routePopularityPlusOne(route.getId());
         } catch (MailException mailException) {
             String failMsg = "Nie udało się wysłać maila na adres " + email + ". Spróbuj ponownie.";
             model.addAttribute("resultMsg", failMsg);

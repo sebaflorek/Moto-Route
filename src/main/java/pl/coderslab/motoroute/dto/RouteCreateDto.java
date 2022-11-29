@@ -10,6 +10,7 @@ import javax.validation.constraints.*;
 public class RouteCreateDto {
 
     @NotEmpty
+    @Size(min = 3, max = 30, message = "{invalid.name.name-length}")
     private String name;
 
     @Min(1)

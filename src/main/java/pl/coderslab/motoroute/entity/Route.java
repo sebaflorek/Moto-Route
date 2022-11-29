@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 public class Route {
 
-    /* UWAGA: USUNĄĆ WALIDACJĘ JAK BĘDZIE MAPSTRUCT I UserEditDto */
+    /* UWAGA: USUNĄĆ WALIDACJĘ JAK BĘDZIE MAPSTRUCT I RouteEditDto! */
     public static final String TABLE_NAME = "routes";
 
     @Id
@@ -20,6 +20,7 @@ public class Route {
     private long id;
 
     @NotEmpty
+    @Size(min = 3, max = 30, message = "{invalid.name.name-length}")
     private String name;
 
     @Min(1)
@@ -55,9 +56,6 @@ public class Route {
 
     private long authorId;
 
-    //@ManyToMany(mappedBy = "favouriteRoutes", cascade = CascadeType.ALL)
-    //private List<User> favoriteUsers;
-
     @PrePersist
     public void prePersist() {
         created = LocalDateTime.now();
@@ -67,8 +65,6 @@ public class Route {
     public void preUpdate() {
         updated = LocalDateTime.now();
     }
-
-
 
 
 }

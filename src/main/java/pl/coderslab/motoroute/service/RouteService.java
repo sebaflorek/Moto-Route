@@ -79,6 +79,12 @@ public class RouteService {
         routeRepository.save(route);
     }
 
+    public void routePopularityPlusOne(long routeId) {
+        Route route = findById(routeId);
+        route.setPopularity(route.getPopularity() + 1);
+        routeRepository.save(route);
+    }
+
     public void sendRouteViaEmail(String email, String receiverName, Route route) {
         String title = "Moto Route: Trasa";
         StringBuilder message = new StringBuilder();
