@@ -10,13 +10,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.RouteCreateDto;
 import pl.coderslab.motoroute.dto.RouteSendDto;
-import pl.coderslab.motoroute.emails.EmailService;
 import pl.coderslab.motoroute.entity.*;
 import pl.coderslab.motoroute.security.CurrentUser;
-import pl.coderslab.motoroute.service.RegionService;
-import pl.coderslab.motoroute.service.RouteService;
-import pl.coderslab.motoroute.service.TypeService;
-import pl.coderslab.motoroute.service.UserService;
+import pl.coderslab.motoroute.service.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -29,7 +25,7 @@ public class RouteController {
     private final RegionService regionService;
     private final TypeService typeService;
     private final UserService userService;
-    private final EmailService emailService;
+    private final TripService tripService;
     private CurrentUser currentUser;
 
     /* ================= MODEL ATTRIBUTES ================= */
@@ -49,16 +45,18 @@ public class RouteController {
         return currentUser;
     }
 
-    /* ================= ROUTES VIEWING ================= */
+    /* ================= ROUTES READING ================= */
     @RequestMapping("/dashboard")
     public String showPulpit(Model model) {
-        long currentUserId = currentUser.getUser().getId();
-        Route latestRoute = routeService.findLatestByAuthorId(currentUserId);
-        int routesNum = routeService.countAllByAuthorId(currentUserId);
+        User user = currentUser.getUser();
+        Route latestRoute = routeService.findLatestByAuthorId(user.getId());
+        int routesNum = routeService.countAllByAuthorId(user.getId());
+        Trip latestTrip = tripService.findLatestByUser(user);
+        int tripsNum = tripService.countAllByUser(user);
         model.addAttribute("latestRoute", latestRoute);
-        model.addAttribute("latestTrip", null);
+        model.addAttribute("latestTrip", latestTrip);
         model.addAttribute("routesNum", routesNum);
-        model.addAttribute("tripsNum", null);
+        model.addAttribute("tripsNum", tripsNum);
         return "app-dashboard";
     }
 
@@ -94,7 +92,7 @@ public class RouteController {
         if (result.hasErrors()) {
             return "app-routeAdd";
         }
-        routeService.saveWithDto(routeCreateDto);
+        routeService.createWithDto(routeCreateDto);
         return "redirect:/app/route/dashboard";
     }
 

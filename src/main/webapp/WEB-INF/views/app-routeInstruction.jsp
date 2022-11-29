@@ -18,7 +18,7 @@
             <li>Wejdź na <a href="https://maps.openrouteservice.org">Open Route Service</a> lub skorzystaj z okna na
                 stronie dodawania trasy.
             </li>
-            <li>Zaprojektuj swoją trasę i kliknij SHARE.</li>
+            <li>Zaprojektuj swoją trasę i w rozwijanym na mapie menu kliknij share.</li>
             <li>Skopiuj i wklej link do Swojej mapy w odpowiednie pole formularza dodawania nowej trasy.</li>
         </ul>
         Gotowe!

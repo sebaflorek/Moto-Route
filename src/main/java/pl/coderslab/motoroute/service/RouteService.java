@@ -21,7 +21,7 @@ public class RouteService {
         routeRepository.save(route);
     }
 
-    public void saveWithDto(RouteCreateDto routeCreateDto) {
+    public void createWithDto(RouteCreateDto routeCreateDto) {
         Route route = new Route();
         route.setName(routeCreateDto.getName());
         route.setDistance(routeCreateDto.getDistance());

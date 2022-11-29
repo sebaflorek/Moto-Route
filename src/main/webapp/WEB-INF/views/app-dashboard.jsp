@@ -18,13 +18,14 @@
         <table>
             <tr>
                 <td>
-                    <button onclick="location.href='<c:url value="/app/route/add"/>'" type="button">+ TRASĘ</button>
+                    <button onclick="location.href='<c:url value="/app/route/add"/>'" type="button">DODAJ TRASĘ</button>
                 </td>
                 <td>
-                    <button onclick="location.href='<c:url value="/app/trip/add"/>'" type="button">+ WYCIECZKĘ</button>
+                    <button onclick="location.href='<c:url value="/app/trip/add"/>'" type="button">DODAJ WYCIECZKĘ
+                    </button>
                 </td>
                 <td>
-                    <button onclick="location.href='<c:url value="/app/trip/add-route"/>'" type="button">+ TRASĘ DO WYCIECZKI
+                    <button onclick="location.href='<c:url value="/app/trip/add-route"/>'" type="button">DODAJ TRASĘ DO WYCIECZKI
                     </button>
                 </td>
             </tr>
@@ -47,11 +48,13 @@
                         Rodzaj trasy: <b>${latestRoute.type.name}</b><br>
                         Lokalizacja: <b>${latestRoute.region.name}</b><br>
                         Długość trasy: <b>${latestRoute.distance}km</b><br>
-                        <button onclick="location.href='<c:url value="/app/route/details/${latestRoute.id}"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/details/${latestRoute.id}"/>'"
+                                type="button">
                             Szczegóły
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/edit/${latestRoute.id}"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/edit/${latestRoute.id}"/>'"
+                                type="button">
                             Edytuj
                         </button>
                         <br>
@@ -59,11 +62,13 @@
                             <button onclick="return confirm('Czy na pewno usunąć Trasę?')" type="submit">Usuń</button>
                         </a>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/download/${latestRoute.id}"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/download/${latestRoute.id}"/>'"
+                                type="button">
                             Pobierz
                         </button>
                         <br>
-                        <button onclick="location.href='<c:url value="/app/route/send/${latestRoute.id}"/>'" type="button">
+                        <button onclick="location.href='<c:url value="/app/route/send/${latestRoute.id}"/>'"
+                                type="button">
                             Wyślij
                         </button>
                         <br>
@@ -78,7 +83,30 @@
         <h3>OSTATNIO DODANA WYCIECZKA: <span class="dashCol"><c:out value="${latestTrip.name.toUpperCase()}"
                                                                     default="BRAK WYCIECZEK"/></span></h3>
         <c:if test="${not empty latestTrip}">
-            OSTATNIA WYCIECZKA
+            <table class="tab">
+                <tr>
+                    <td class="tripInfo">
+                        Ilość dni: <b>${latestTrip.numberOfDays}</b><br>
+                        Opis wycieczki:
+                        <b>${latestTrip.description}</b><br>
+                    </td>
+                    <td class="routeInfo">
+                        <button onclick="location.href='<c:url value="/app/trip/details/${latestTrip.id}"/>'"
+                                type="button">
+                            Szczegóły
+                        </button>
+                        <br>
+                        <button onclick="location.href='<c:url value="/app/trip/edit/${latestTrip.id}"/>'"
+                                type="button">
+                            Edytuj
+                        </button>
+                        <br>
+                        <a href='<c:url value="/app/trip/delete/${latestTrip.id}"/>'>
+                            <button onclick="return confirm('Czy na pewno usunąć Wycieczkę?')" type="submit">Usuń</button>
+                        </a>
+                    </td>
+                </tr>
+            </table>
         </c:if>
         <%--CONTENT-STOP--%>
     </td>
