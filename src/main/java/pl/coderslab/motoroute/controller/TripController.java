@@ -8,12 +8,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.TripCreateDto;
 import pl.coderslab.motoroute.entity.Trip;
+import pl.coderslab.motoroute.entity.TripDay;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.RouteService;
 import pl.coderslab.motoroute.service.TripService;
 
 import javax.validation.Valid;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/app/trip")
@@ -41,8 +44,9 @@ public class TripController {
     @GetMapping("/details/{id}")
     public String tripDetails(Model model, @PathVariable Long id) {
         Trip trip = tripService.findById(id);
+        //trip.getTripDays().sort(Comparator.comparingInt(TripDay::getDayNumber));
         if (trip.getUser().getId() == currentUser.getUser().getId()) {
-            model.addAttribute("trip", tripService.findById(id));
+            model.addAttribute("trip", trip);
             return "app-tripDetails";
         }
         return "error-illegal";

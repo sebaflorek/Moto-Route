@@ -14,7 +14,7 @@
         <%--CONTENT-START--%>
         <h2>MOJE WYCIECZKI</h2>
         <hr>
-        <button onclick="location.href='<c:url value="/app/trip/route-add"/>'"
+        <button onclick="location.href='<c:url value="/app/trip-day/add"/>'"
                 type="button">
             Dodaj trasę do wycieczki
         </button>
@@ -24,7 +24,7 @@
             <table class="tab">
                 <tr>
                     <td class="tripInfo">
-                        Ilość dni: <b>${trip.numberOfDays}</b><br>
+                        Ilość dni: <b>${trip.tripDays.size()}</b><br>
                         Opis wycieczki:
                         <b>${trip.description}</b><br>
                     </td>

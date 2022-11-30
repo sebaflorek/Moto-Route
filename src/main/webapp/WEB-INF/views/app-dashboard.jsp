@@ -25,7 +25,7 @@
                     </button>
                 </td>
                 <td>
-                    <button onclick="location.href='<c:url value="/app/trip/add-route"/>'" type="button">DODAJ TRASĘ DO WYCIECZKI
+                    <button onclick="location.href='<c:url value="/app/trip-day/add"/>'" type="button">DODAJ TRASĘ DO WYCIECZKI
                     </button>
                 </td>
             </tr>
@@ -86,7 +86,7 @@
             <table class="tab">
                 <tr>
                     <td class="tripInfo">
-                        Ilość dni: <b>${latestTrip.numberOfDays}</b><br>
+                        Ilość dni: <b>${latestTrip.tripDays.size()}</b><br>
                         Opis wycieczki:
                         <b>${latestTrip.description}</b><br>
                     </td>

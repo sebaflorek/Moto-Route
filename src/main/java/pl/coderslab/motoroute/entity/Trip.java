@@ -1,13 +1,13 @@
 package pl.coderslab.motoroute.entity;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = Trip.TABLE_NAME)
@@ -26,13 +26,14 @@ public class Trip {
     @Size(max = 500, message = "{invalid.description.description-length}")
     private String description;
 
-    @Range(min = 1, max = 14, message = "{invalid.numberOfDays.numberOfDays}")
-    private int numberOfDays;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
     @NotNull
     private User user;
+
+    @OneToMany(mappedBy = "trip", cascade = CascadeType.REMOVE)
+    @OrderBy("dayNumber asc")
+    private List<TripDay> tripDays;
 
     private LocalDateTime created;
 

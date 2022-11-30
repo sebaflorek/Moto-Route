@@ -1,6 +1,7 @@
 package pl.coderslab.motoroute.service;
 
 import lombok.RequiredArgsConstructor;
+import org.hibernate.Hibernate;
 import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.TripCreateDto;
 import pl.coderslab.motoroute.entity.Trip;
@@ -24,17 +25,20 @@ public class TripService {
         Trip trip = new Trip();
         trip.setName(tripCreateDto.getName());
         trip.setDescription(tripCreateDto.getDescription());
-        trip.setNumberOfDays(tripCreateDto.getNumberOfDays());
         trip.setUser(user);
         tripRepository.save(trip);
     }
 
     public Trip findById(long id) {
-        return tripRepository.findById(id).orElse(null);
+        Trip trip = tripRepository.findById(id).orElse(null);
+        addTripDaysToTrip(trip);
+        return trip;
     }
 
     public Trip findLatestByUser(User user) {
-        return tripRepository.findFirstTripByUserOrderByCreatedDesc(user);
+        Trip latestTripByUser = tripRepository.findFirstTripByUserOrderByCreatedDesc(user);
+        addTripDaysToTrip(latestTripByUser);
+        return latestTripByUser;
     }
 
     public List<Trip> findAll() {
@@ -42,14 +46,24 @@ public class TripService {
     }
 
     public List<Trip> findAllByUser(User user) {
-        return tripRepository.findTripsByUser(user);
+        List<Trip> tripsByUser = tripRepository.findTripsByUser(user);
+        tripsByUser.forEach(this::addTripDaysToTrip);
+        return tripsByUser;
     }
 
     public void deleteById(long id) {
         tripRepository.deleteById(id);
     }
 
+    public void deleteByTrip(Trip trip) {
+        tripRepository.delete(trip);
+    }
+
     public int countAllByUser(User user) {
         return tripRepository.countAllByUser(user);
+    }
+
+    private void addTripDaysToTrip(Trip trip) {
+        Hibernate.initialize(trip.getTripDays());
     }
 }

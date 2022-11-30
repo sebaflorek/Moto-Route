@@ -14,51 +14,45 @@
         <%--CONTENT-START--%>
         <h2>WYCIECZKA: <span class="dashCol">${trip.name.toUpperCase()}</span></h2>
         <hr>
-        <button onclick="location.href='<c:url value="/app/trip/route-add"/>'"
+        <button onclick="location.href='<c:url value="/app/trip-day/add"/>'"
                 type="button">
             Dodaj trasę do wycieczki
         </button>
-        <button onclick="location.href='<c:url value="/app/trip/${trip.id}/route-purge"/>'"
-                type="button">
-            Usuń wszystkie trasy z wycieczki
-        </button>
+        <a href='<c:url value="/app/trip-day/delete-all/${trip.id}"/>'>
+            <button class="myButton" onclick="return confirm('Czy na pewno chcesz usunąć wszystkie dni z tej wycieczki?')"
+                    type="submit">Usuń wszystkie dni
+            </button>
+        </a>
         <hr>
         <h3>Czas trwania:</h3>
-        <p>${trip.numberOfDays} dni</p>
+        <p>${trip.tripDays.size()} dni</p>
         <h3>Opis:</h3>
         <p>${trip.description}</p>
         <h3>Plan wycieczki:</h3>
         <table class="details-table">
+
             <tr>
                 <th>Dzień</th>
                 <th>Nazwa trasy</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Poznaj świętokrzyskie</td>
-                <td>
-                    <button onclick="location.href='<c:url value="/app/route/details/${route.id}"/>'"
-                            type="button">
-                        Szczegóły
-                    </button>
-                    <a href='<c:url value="/app/trip/${trip.id}/route-del/${route.id}"/>'>
-                        <button type="submit">Usuń z wycieczki</button>
-                    </a>
-                </td>
-            </tr>
-            <tr>
-            <td>2</td>
-            <td>Poznaj podkarpackie</td>
-            <td>
-                <button onclick="location.href='<c:url value="/app/route/details/${route.id}"/>'"
-                        type="button">
-                    Szczegóły
-                </button>
-                <a href='<c:url value="/app/trip/${trip.id}/route-del/${route.id}"/>'>
-                    <button type="submit">Usuń z wycieczki</button>
-                </a>
-            </td>
-            </tr>
+            <c:forEach var="tripDay" items="${trip.tripDays}">
+                <tr>
+                    <td>${tripDay.dayNumber}</td>
+                    <td>${tripDay.route.name}</td>
+                    <td>
+                        <button onclick="location.href='<c:url value="/app/route/details/${tripDay.route.id}"/>'"
+                                type="button" class="myButton">
+                            Szczegóły trasy
+                        </button>
+                        <a href='<c:url value="/app/trip-day/delete/${tripDay.id}/${trip.id}"/>'>
+                            <button class="myButton" onclick="return confirm('Czy na pewno usunąć ten dzień?')"
+                                    type="submit">Usuń dzień
+                            </button>
+                        </a>
+                    </td>
+                </tr>
+            </c:forEach>
+
         </table>
         <%--CONTENT-STOP--%>
     </td>

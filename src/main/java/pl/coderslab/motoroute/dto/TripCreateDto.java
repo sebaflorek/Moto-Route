@@ -1,7 +1,6 @@
 package pl.coderslab.motoroute.dto;
 
 import lombok.Data;
-import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
@@ -15,8 +14,5 @@ public class TripCreateDto {
 
     @Size(max = 500, message = "{invalid.description.description-length}")
     private String description;
-
-    @Range(min = 1, max = 14, message = "{invalid.numberOfDays.numberOfDays}")
-    private int numberOfDays;
 
 }

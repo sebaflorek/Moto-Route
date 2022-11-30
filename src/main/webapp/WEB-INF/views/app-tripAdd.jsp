@@ -27,11 +27,6 @@
                 <form:textarea path="description" placeholder="Max 500 znaków"/><br>
                 <form:errors path="description" cssClass="errorMsg"/>
             </label><br>
-            <label>
-                Ilość dni:<br>
-                <form:input path="numberOfDays" type="number" min="1" step="1"/><br>
-                <form:errors path="numberOfDays" cssClass="errorMsg"/>
-            </label><br>
             <label><input type="submit" value="Dodaj"></label>
 
         </form:form>
