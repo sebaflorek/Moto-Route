@@ -44,10 +44,6 @@ public class TripDayController {
         return tripService.findAllByUser(currentUser.getUser());
     }
 
-    /* ================= TRIP DAY READING ================= */
-
-
-
     /* ================= TRIP DAY MANAGEMENT ================= */
     @GetMapping("/add")
     public String tripDayForm(Model model) {

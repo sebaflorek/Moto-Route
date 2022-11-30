@@ -20,7 +20,7 @@
             <label>
                 Imię odbiorcy:<br>
                 <form:input path="name"/><br>
-                <form:errors path="email" cssClass="errorMsg"/>
+                <form:errors path="name" cssClass="errorMsg"/>
             </label><br>
             <label>
                 Email odbiorcy:<br>
