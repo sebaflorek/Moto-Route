@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import pl.coderslab.motoroute.dto.TripDayCreateDto;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.Trip;
 import pl.coderslab.motoroute.entity.TripDay;
@@ -45,19 +46,35 @@ public class TripDayController {
     }
 
     /* ================= TRIP DAY MANAGEMENT ================= */
+//    @GetMapping("/add")
+//    public String tripDayForm(Model model) {
+//        model.addAttribute("tripDay", new TripDay());
+//        return "app-tripDayForm";
+//    }
+
     @GetMapping("/add")
     public String tripDayForm(Model model) {
-        model.addAttribute("tripDay", new TripDay());
+        model.addAttribute("tripDay", new TripDayCreateDto());
         return "app-tripDayForm";
     }
 
+//    @PostMapping("/add")
+//    public String saveTripDay(@Valid TripDay tripDay, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "app-tripDayForm";
+//        }
+//        long tripId = tripDay.getTrip().getId();
+//        tripDayService.save(tripDay);
+//        return "redirect:/app/trip/details/" + tripId;
+//    }
+
     @PostMapping("/add")
-    public String saveTripDay(@Valid TripDay tripDay, BindingResult result) {
+    public String saveTripDay(@ModelAttribute("tripDay") @Valid TripDayCreateDto tripDay, BindingResult result) {
         if (result.hasErrors()) {
             return "app-tripDayForm";
         }
         long tripId = tripDay.getTrip().getId();
-        tripDayService.save(tripDay);
+        tripDayService.createWithDto(tripDay);
         return "redirect:/app/trip/details/" + tripId;
     }
 
@@ -81,6 +98,13 @@ public class TripDayController {
         }
         return "error-illegal";
 
+    }
+    /* ================= TESTS ================= */
+    @RequestMapping("/test/{dayNumber}/{tripId}")
+    @ResponseBody
+    public String test(@PathVariable int dayNumber, @PathVariable long tripId) {
+        boolean check = tripDayService.isTripDayUniqueByItsDayNumberAndTripId(dayNumber, tripId);
+        return "rozmiar listy:" + check;
     }
 
 
