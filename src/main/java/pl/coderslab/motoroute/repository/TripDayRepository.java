@@ -14,7 +14,6 @@ import java.util.List;
 @Repository
 @Transactional
 public interface TripDayRepository extends JpaRepository<TripDay, Long> {
-
     @Query("select td from TripDay td where td.dayNumber = :dayNum and td.trip.id = :tripId")
     List<TripDay> findTripDaysByDayNumberAndTripId(@Param("dayNum") int dayNumber, @Param("tripId") long tripId);
 

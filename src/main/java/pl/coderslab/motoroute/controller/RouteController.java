@@ -122,7 +122,7 @@ public class RouteController {
     public String deleteRoute(@PathVariable Long id) {
         Route route = routeService.findById(id);
         if (route.getAuthorId() == currentUser.getUser().getId()) {
-            routeService.deleteRoutesFromUsersFavorites(id); //czy jest inny sposób?
+            routeService.deleteRoutesFromUsersFavorites(id);
             routeService.deleteById(id);
             return "redirect:/app/route/my-list";
         }

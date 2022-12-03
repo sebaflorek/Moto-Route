@@ -1,9 +1,7 @@
 package pl.coderslab.motoroute.validation;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
 import pl.coderslab.motoroute.dto.TripDayCreateDto;
-import pl.coderslab.motoroute.entity.TripDay;
 import pl.coderslab.motoroute.service.TripDayService;
 
 import javax.validation.ConstraintValidator;

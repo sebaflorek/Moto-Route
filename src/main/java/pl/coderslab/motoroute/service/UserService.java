@@ -5,10 +5,12 @@ import org.hibernate.Hibernate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.UserCreateDto;
+import pl.coderslab.motoroute.dto.UserEditDto;
 import pl.coderslab.motoroute.entity.Role;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.repository.RoleRepository;
+import pl.coderslab.motoroute.repository.TripRepository;
 import pl.coderslab.motoroute.repository.UserRepository;
 
 import javax.transaction.Transactional;
@@ -23,6 +25,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final TripRepository tripRepository;
     private final BCryptPasswordEncoder passwordEncoder;
 
     public void save(User user) {
@@ -70,7 +73,24 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void deleteById(long id) {
+    public void editUserById(long id, UserEditDto userEditDto) {
+        User user = userRepository.findById(id).orElse(null);
+        assert user != null;
+        user.setUsername(userEditDto.getUsername());
+        user.setEmail(userEditDto.getEmail());
+        userRepository.save(user);
+    }
+
+    public void purgeUserDataById(long id) {
+        tripRepository.deleteAllByUserId(id); // TYMCZASOWO
+//        userRepository.deleteUserAllFavoriteRoutesByUserId(id); // TYMCZASOWO
+//        userRepository.deleteUserRolesByUserId(id); // TYMCZASOWO
+    }
+
+    public void fullDeleteUserById(long id) {
+//        tripRepository.deleteAllByUserId(id); // TYMCZASOWO
+//        userRepository.deleteUserAllFavoriteRoutesByUserId(id); // TYMCZASOWO +
+//        userRepository.deleteUserRolesByUserId(id); // TYMCZASOWO +
         userRepository.deleteById(id);
     }
 

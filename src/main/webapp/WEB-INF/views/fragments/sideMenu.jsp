@@ -8,8 +8,7 @@
 <button onclick="location.href='<c:url value="/app/route/fav-list"/>'" type="button">ULUBIONE TRASY</button><br><br>
 <button onclick="location.href='<c:url value="/app/trip/list"/>'" type="button">MOJE WYCIECZKI</button><br><br>
 <button onclick="location.href='<c:url value="/app/trip/add"/>'" type="button">DODAJ WYCIECZKĘ</button><br><br>
-<button onclick="location.href='<c:url value="/app/maintenance"/>'" type="button">EDYTUJ PROFIL</button><br><br>
-<button onclick="location.href='<c:url value="/app/maintenance"/>'" type="button">ZMIEŃ HASŁO</button><br><br>
+<button onclick="location.href='<c:url value="/app/user/details"/>'" type="button">TWÓJ PROFIL</button><br><br>
 <button onclick="location.href='<c:url value="/logout"/>'" type="button">WYLOGUJ</button>
 </td>
 </sec:authorize>

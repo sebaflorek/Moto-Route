@@ -30,15 +30,11 @@ public class TripService {
     }
 
     public Trip findById(long id) {
-        Trip trip = tripRepository.findById(id).orElse(null);
-        addTripDaysToTrip(trip);
-        return trip;
+        return tripRepository.findById(id).orElse(null);
     }
 
     public Trip findLatestByUser(User user) {
-        Trip latestTripByUser = tripRepository.findFirstTripByUserOrderByCreatedDesc(user);
-        addTripDaysToTrip(latestTripByUser);
-        return latestTripByUser;
+        return tripRepository.findFirstTripByUserOrderByCreatedDesc(user);
     }
 
     public List<Trip> findAll() {
@@ -46,13 +42,15 @@ public class TripService {
     }
 
     public List<Trip> findAllByUser(User user) {
-        List<Trip> tripsByUser = tripRepository.findTripsByUser(user);
-        tripsByUser.forEach(this::addTripDaysToTrip);
-        return tripsByUser;
+        return tripRepository.findTripsByUser(user);
     }
 
     public void deleteById(long id) {
         tripRepository.deleteById(id);
+    }
+
+    public void deleteAllTripsByUserId(long id) { // TYMCZASOWO
+        tripRepository.deleteAllByUserId(id);
     }
 
     public void deleteByTrip(Trip trip) {

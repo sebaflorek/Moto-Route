@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueUsernameValidator.class)
+@Constraint(validatedBy = {UniqueUsernameValidator.class, UniqueUsernameToEditValidator.class})
 @Documented
 public @interface UniqueUsername {
     String message() default "{invalid.username.username-unique}";
