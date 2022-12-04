@@ -58,7 +58,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "app-userEdit";
         }
-        userService.editUserById(currentUser.getUser().getId(), userEditDto);
+        userService.updateUserById(userEditDto);
         return "redirect:/app/user/details";
     }
 

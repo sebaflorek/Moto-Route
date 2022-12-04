@@ -74,8 +74,8 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void editUserById(long id, UserEditDto userEditDto) {
-        User user = userRepository.findById(id).orElse(null);
+    public void updateUserById(UserEditDto userEditDto) {
+        User user = userRepository.findById(userEditDto.getId()).orElse(null);
         assert user != null;
         user.setUsername(userEditDto.getUsername());
         user.setEmail(userEditDto.getEmail());
@@ -90,9 +90,9 @@ public class UserService {
     }
 
     public void fullDeleteUserById(long id) {
-        tripRepository.deleteAllByUserId(id); //TYMCZASOWO
-        userRepository.deleteUserAllFavoriteRoutesByUserId(id); //TYMCZASOWO +
-        userRepository.deleteUserRolesByUserId(id); //TYMCZASOWO +
+        tripRepository.deleteAllByUserId(id);
+        //userRepository.deleteUserAllFavoriteRoutesByUserId(id);
+        //userRepository.deleteUserRolesByUserId(id);
         userRepository.deleteById(id);
     }
 

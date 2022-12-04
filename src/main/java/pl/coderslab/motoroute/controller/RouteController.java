@@ -14,6 +14,7 @@ import pl.coderslab.motoroute.entity.*;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.*;
 
+import javax.swing.*;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -119,11 +120,15 @@ public class RouteController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteRoute(@PathVariable Long id) {
+    public String deleteRoute(@PathVariable Long id, Model model) {
         Route route = routeService.findById(id);
         if (route.getAuthorId() == currentUser.getUser().getId()) {
-            routeService.deleteRoutesFromUsersFavorites(id);
-            routeService.deleteById(id);
+            routeService.conditionalDeleteRouteById(id);
+            if (routeService.isRouteUsed(id)) {
+                String resultMsg = "Nie można usunąć wybranej trasy. Trasa przypisana jest do wycieczki.";
+                model.addAttribute("resultMsg", resultMsg);
+                return "my-message";
+            }
             return "redirect:/app/route/my-list";
         }
         return "error-illegal";

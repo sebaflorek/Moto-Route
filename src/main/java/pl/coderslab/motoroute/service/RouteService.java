@@ -6,7 +6,9 @@ import pl.coderslab.motoroute.dto.RouteCreateDto;
 import pl.coderslab.motoroute.emails.EmailService;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.repository.RouteRepository;
+import pl.coderslab.motoroute.repository.TripDayRepository;
 
+import javax.swing.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RouteService {
     private final RouteRepository routeRepository;
+    private final TripDayRepository tripDayRepository;
     private final EmailService emailService;
 
     public void save(Route route) {
@@ -59,12 +62,19 @@ public class RouteService {
         routeRepository.deleteById(id);
     }
 
-    public int countAllByAuthorId(long authorId) {
-        return routeRepository.countAllByAuthorId(authorId);
-    }
-
     public void deleteRoutesFromUsersFavorites(long routeId) {
         routeRepository.deleteRoutesFromUsersFavorites(routeId);
+    }
+
+    public void conditionalDeleteRouteById(long id) {
+        if (!isRouteUsed(id)) {
+            routeRepository.deleteRoutesFromUsersFavorites(id);
+            routeRepository.deleteById(id);
+        }
+    }
+
+    public int countAllByAuthorId(long authorId) {
+        return routeRepository.countAllByAuthorId(authorId);
     }
 
     public void routeLikePlusOne(long routeId) {
@@ -103,5 +113,8 @@ public class RouteService {
 
     }
 
+    public boolean isRouteUsed(long routeId) {
+        return !tripDayRepository.findTripDaysByRouteId(routeId).isEmpty();
+    }
 
 }

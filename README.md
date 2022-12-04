@@ -7,8 +7,8 @@ Welcome to Web application for motorcyclists.
 ### Used tools and technologies
 1. Spring Boot, Spring Security, Spring MVC, Spring JPA
 2. Hibernate, Hibernate Validator
-3. HTML, CSS
-4. MySQL
+3. MySQL
+4. HTML, CSS
 
 ### Features
 1. <ins>User</ins>
@@ -19,8 +19,7 @@ Welcome to Web application for motorcyclists.
 - Downloading and sharing routes with others using emails.
 - Editing and deleting your own routes
 - Using routes to make a trip
-- Like button
-- Add others routes to your favorites 
+- Add routes to your favorites 
 3. <ins>Motorcycle Trips</ins> (You can plan multi-day trips with numerous routes to follow) 
 - Adding new trips
 - Editing and deleting your trips

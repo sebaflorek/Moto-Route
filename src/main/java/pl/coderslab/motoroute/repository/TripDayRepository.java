@@ -13,6 +13,8 @@ import java.util.List;
 
 @Repository
 public interface TripDayRepository extends JpaRepository<TripDay, Long> {
+    List<TripDay> findTripDaysByRouteId(Long routeId);
+
     @Query("select td from TripDay td where td.dayNumber = :dayNum and td.trip.id = :tripId")
     List<TripDay> findTripDaysByDayNumberAndTripId(@Param("dayNum") int dayNumber, @Param("tripId") long tripId);
 
