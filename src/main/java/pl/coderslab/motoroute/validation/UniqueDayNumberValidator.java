@@ -8,7 +8,7 @@ import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
 @RequiredArgsConstructor
-public class UniqueDayValidator implements ConstraintValidator<UniqueDayNumber, TripDayCreateDto> {
+public class UniqueDayNumberValidator implements ConstraintValidator<UniqueDayNumber, TripDayCreateDto> {
     private final TripDayService tripDayService;
 
     @Override

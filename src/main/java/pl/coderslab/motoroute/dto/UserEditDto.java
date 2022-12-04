@@ -13,7 +13,6 @@ import javax.validation.constraints.Size;
 @UniqueEmail
 @UniqueUsername
 public class UserEditDto {
-
     private long id;
 
     @NotEmpty
@@ -23,8 +22,5 @@ public class UserEditDto {
     @NotEmpty
     @Email
     private String email;
-
-//    @NotEmpty
-//    private String password;
 
 }

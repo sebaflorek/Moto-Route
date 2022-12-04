@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.UserCreateDto;
 import pl.coderslab.motoroute.dto.UserEditDto;
+import pl.coderslab.motoroute.dto.UserPassDto;
 import pl.coderslab.motoroute.entity.Role;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.User;
@@ -78,6 +79,13 @@ public class UserService {
         assert user != null;
         user.setUsername(userEditDto.getUsername());
         user.setEmail(userEditDto.getEmail());
+        userRepository.save(user);
+    }
+
+    public void updatePassword(UserPassDto userPassDto) {
+        User user = userRepository.findById(userPassDto.getId()).orElse(null);
+        assert user != null;
+        user.setPassword(passwordEncoder.encode(userPassDto.getNewPassword()));
         userRepository.save(user);
     }
 

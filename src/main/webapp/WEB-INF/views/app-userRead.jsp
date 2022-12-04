@@ -11,13 +11,12 @@
 <table style="width: 100%">
     <%@ include file="fragments/sideMenu.jsp" %>
     <td class="mainContent">
-        <%--${currentUser}--%>
         <h2>TWÓJ PROFIL</h2>
         <hr>
         <button onclick="location.href='<c:url value="/app/user/edit"/>'" type="button">
             Edytuj profil
         </button>
-        <button onclick="location.href='<c:url value="/app/maintenance"/>'" type="button">
+        <button onclick="location.href='<c:url value="/app/user/change-pass"/>'" type="button">
             Zmień hasło
         </button>
         <a href='<c:url value="/app/user/delete"/>'>
@@ -28,15 +27,8 @@
         <hr>
         <h3>Login: <span class="dashCol">${userInfo.username}</span></h3>
         <h3>Email: <span class="dashCol">${userInfo.email}</span></h3>
-
-        TESTY<br>
-        Login: ${currentUser.user.username}<br>
-        Email: ${currentUser.user.email}<br>
-        User: ${currentUser}
-
     </td>
 </table>
-
 
 <%@ include file="fragments/footer.jsp" %>
 </body>

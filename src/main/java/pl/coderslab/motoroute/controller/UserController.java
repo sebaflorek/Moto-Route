@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.UserEditDto;
+import pl.coderslab.motoroute.dto.UserPassDto;
 import pl.coderslab.motoroute.dto.UserReadDto;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.security.CurrentUser;
@@ -59,6 +60,30 @@ public class UserController {
         }
         userService.editUserById(currentUser.getUser().getId(), userEditDto);
         return "redirect:/app/user/details";
+    }
+
+    @GetMapping("/change-pass")
+    public String changePassForm(Model model) {
+        UserPassDto userPassDto = new UserPassDto();
+        userPassDto.setId(currentUser.getUser().getId());
+        model.addAttribute("userPassDto", userPassDto);
+        return "app-userPassEdit";
+    }
+
+    @PostMapping("/change-pass")
+    public String changePassword(@Valid UserPassDto userPassDto, BindingResult result, HttpServletRequest request, Model model) {
+        if (result.hasErrors()) {
+            return "app-userPassEdit";
+        }
+        userService.updatePassword(userPassDto);
+        try {
+            request.logout();
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        }
+        String resultMsg = "Hasło zostało zmienione. Zaloguj się ponownie używając nowego hasła.";
+        model.addAttribute("resultMsg", resultMsg);
+        return "my-message";
     }
 
     @RequestMapping("/delete")

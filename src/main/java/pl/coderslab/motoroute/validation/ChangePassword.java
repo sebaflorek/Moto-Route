@@ -6,10 +6,10 @@ import java.lang.annotation.*;
 
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = {PasswordMatchesValidator.class, ConfirmChangePasswordValidator.class})
+@Constraint(validatedBy = ChangePasswordValidator.class)
 @Documented
-public @interface PasswordMatches {
-    String message() default "{invalid.password.confirm-password}";
+public @interface ChangePassword {
+    String message() default "{invalid.password.old-password}";
     Class<?>[] groups() default {};
     Class<? extends Payload>[] payload() default {};
 }

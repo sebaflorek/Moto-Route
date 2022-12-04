@@ -6,7 +6,7 @@ import java.lang.annotation.*;
 
 @Target({ElementType.TYPE, ElementType.ANNOTATION_TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Constraint(validatedBy = UniqueDayValidator.class)
+@Constraint(validatedBy = UniqueDayNumberValidator.class)
 @Documented
 public @interface UniqueDayNumber {
     String message() default "{invalid.dayNumber.dayNumber-unique}";
