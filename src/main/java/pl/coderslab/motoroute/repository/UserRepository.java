@@ -10,7 +10,6 @@ import pl.coderslab.motoroute.entity.User;
 import javax.transaction.Transactional;
 
 @Repository
-@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
     User findByUsername(String username);
     User findUserByEmail(String email);

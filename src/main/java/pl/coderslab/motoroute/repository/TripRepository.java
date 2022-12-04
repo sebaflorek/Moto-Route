@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface TripRepository extends JpaRepository<Trip, Long> {
     List<Trip> findTripsByUser(User user);
     Trip findFirstTripByUserOrderByCreatedDesc(User user);

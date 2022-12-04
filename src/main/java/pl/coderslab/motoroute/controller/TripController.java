@@ -8,15 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.TripCreateDto;
 import pl.coderslab.motoroute.entity.Trip;
-import pl.coderslab.motoroute.entity.TripDay;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.RouteService;
 import pl.coderslab.motoroute.service.TripService;
 
 import javax.validation.Valid;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/app/trip")
@@ -65,7 +62,7 @@ public class TripController {
             return "app-tripAdd";
         }
         tripService.createWithDto(tripCreateDto, currentUser.getUser());
-        return "redirect:/app/route/dashboard";
+        return "redirect:/app/trip/list";
     }
 
     @GetMapping("/edit/{id}")

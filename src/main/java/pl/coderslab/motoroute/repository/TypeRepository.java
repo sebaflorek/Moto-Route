@@ -7,7 +7,6 @@ import pl.coderslab.motoroute.entity.Type;
 import javax.transaction.Transactional;
 
 @Repository
-@Transactional
 public interface TypeRepository extends JpaRepository<Type, Long> {
 
 }

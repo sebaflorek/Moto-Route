@@ -63,8 +63,6 @@ public class UserController {
 
     @RequestMapping("/delete")
     public String deleteUser(Model model, HttpServletRequest request) {
-//        tripService.deleteAllTripsByUserId(currentUser.getUser().getId()); // TYMCZASOWO
-//        userService.purgeUserDataById(currentUser.getUser().getId()); // TYMCZASOWO
         userService.fullDeleteUserById(currentUser.getUser().getId());
         try {
             request.logout();

@@ -49,10 +49,6 @@ public class TripService {
         tripRepository.deleteById(id);
     }
 
-    public void deleteAllTripsByUserId(long id) { // TYMCZASOWO
-        tripRepository.deleteAllByUserId(id);
-    }
-
     public void deleteByTrip(Trip trip) {
         tripRepository.delete(trip);
     }

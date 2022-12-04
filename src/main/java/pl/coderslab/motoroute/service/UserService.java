@@ -81,16 +81,10 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void purgeUserDataById(long id) {
-        tripRepository.deleteAllByUserId(id); // TYMCZASOWO
-//        userRepository.deleteUserAllFavoriteRoutesByUserId(id); // TYMCZASOWO
-//        userRepository.deleteUserRolesByUserId(id); // TYMCZASOWO
-    }
-
     public void fullDeleteUserById(long id) {
-//        tripRepository.deleteAllByUserId(id); // TYMCZASOWO
-//        userRepository.deleteUserAllFavoriteRoutesByUserId(id); // TYMCZASOWO +
-//        userRepository.deleteUserRolesByUserId(id); // TYMCZASOWO +
+        tripRepository.deleteAllByUserId(id); //TYMCZASOWO
+        userRepository.deleteUserAllFavoriteRoutesByUserId(id); //TYMCZASOWO +
+        userRepository.deleteUserRolesByUserId(id); //TYMCZASOWO +
         userRepository.deleteById(id);
     }
 

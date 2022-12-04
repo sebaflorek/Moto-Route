@@ -11,7 +11,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
-@Transactional
 public interface RouteRepository extends JpaRepository<Route, Long> {
     List<Route> findRoutesByAuthorId(Long authorId);
     Route findFirstRouteByAuthorIdOrderByCreatedDesc(Long authorId);

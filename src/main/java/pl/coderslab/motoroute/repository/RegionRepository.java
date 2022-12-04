@@ -7,7 +7,6 @@ import pl.coderslab.motoroute.entity.Region;
 import javax.transaction.Transactional;
 
 @Repository
-@Transactional
 public interface RegionRepository extends JpaRepository<Region, Long> {
 
 }
