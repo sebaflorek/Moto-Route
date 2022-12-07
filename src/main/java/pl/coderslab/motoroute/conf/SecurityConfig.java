@@ -16,22 +16,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig {
-
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("testUser")
-//                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW") //password
-//                .roles("USER")
-//                .build();
-//        UserDetails admin = User.builder()
-//                .username("testAdmin")
-//                .password("{bcrypt}$2a$14$8zFeKDCdTEMqtOkd5GtihO.khP26AGQ/Vg/1jO1mJ6mopJDUIIOc6") //krecona
-//                .roles("USER", "ADMIN")
-//                .build();
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
-
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
@@ -45,7 +29,6 @@ public class SecurityConfig {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and().formLogin().defaultSuccessUrl("/app/route/dashboard")
                 .and().logout().logoutSuccessUrl("/");
-        //.loginPage("/login")
         return http.build();
     }
 
