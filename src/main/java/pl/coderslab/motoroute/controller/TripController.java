@@ -20,26 +20,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TripController {
     private final TripService tripService;
-    private final RouteService routeService;
-    private CurrentUser currentUser;
 
     /* ================= MODEL ATTRIBUTES ================= */
     @ModelAttribute("currentUser")
     public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        this.currentUser = currentUser;
         return currentUser;
     }
 
     /* ================= TRIPS READING ================= */
     @GetMapping("/list")
-    public String getMyTripsList(Model model) {
+    public String getMyTripsList(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Trip> trips = tripService.findAllByUser(currentUser.getUser());
         model.addAttribute("tripList", trips);
         return "app-tripList";
     }
 
     @GetMapping("/details/{id}")
-    public String tripDetails(Model model, @PathVariable Long id) {
+    public String tripDetails(Model model, @PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         Trip trip = tripService.findById(id);
         //trip.getTripDays().sort(Comparator.comparingInt(TripDay::getDayNumber));
         if (trip.getUser().getId() == currentUser.getUser().getId()) {
@@ -57,7 +54,7 @@ public class TripController {
     }
 
     @PostMapping("/add")
-    public String addTrip(@Valid TripCreateDto tripCreateDto, BindingResult result) {
+    public String addTrip(@Valid TripCreateDto tripCreateDto, BindingResult result, @AuthenticationPrincipal CurrentUser currentUser) {
         if (result.hasErrors()) {
             return "app-tripAdd";
         }
@@ -66,7 +63,7 @@ public class TripController {
     }
 
     @GetMapping("/edit/{id}")
-    public String editTrip(Model model, @PathVariable Long id) {
+    public String editTrip(Model model, @PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         Trip trip = tripService.findById(id);
         if (trip.getUser().getId() == currentUser.getUser().getId()) {
             model.addAttribute("trip", trip);
@@ -76,7 +73,7 @@ public class TripController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updateTrip(@Valid Trip trip, BindingResult result) {
+    public String updateTrip(@Valid Trip trip, BindingResult result, @AuthenticationPrincipal CurrentUser currentUser) {
         if (result.hasErrors()) {
             return "app-tripEdit";
         }
@@ -88,7 +85,7 @@ public class TripController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteTrip(@PathVariable Long id) {
+    public String deleteTrip(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         Trip trip = tripService.findById(id);
         if (trip.getUser().getId() == currentUser.getUser().getId()) {
             tripService.deleteById(id);

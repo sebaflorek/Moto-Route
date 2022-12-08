@@ -24,19 +24,16 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final TripService tripService;
     private final UserMapper userMapper;
-    private CurrentUser currentUser;
 
     @ModelAttribute("currentUser")
     public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        this.currentUser = currentUser;
         return currentUser;
     }
 
     /* ================= ROUTES READING ================= */
     @GetMapping("/details")
-    public String getUserDetails(Model model) {
+    public String getUserDetails(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = userService.findById(currentUser.getUser().getId());
         UserReadDto userReadDto = new UserReadDto(user.getUsername(), user.getEmail());
         model.addAttribute("userInfo", userReadDto);
@@ -56,7 +53,7 @@ public class UserController {
 //    }
 
     @GetMapping("/edit") // WITH MAPPER
-    public String editUserForm(Model model) {
+    public String editUserForm(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = userService.findById(currentUser.getUser().getId());
         UserEditDto userEditDto = userMapper.userToUserEditDto(user);
         model.addAttribute("userEditDto", userEditDto);
@@ -73,7 +70,7 @@ public class UserController {
     }
 
     @GetMapping("/change-pass")
-    public String changePassForm(Model model) {
+    public String changePassForm(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         UserPassDto userPassDto = new UserPassDto();
         userPassDto.setId(currentUser.getUser().getId());
         model.addAttribute("userPassDto", userPassDto);
@@ -97,7 +94,7 @@ public class UserController {
     }
 
     @RequestMapping("/delete")
-    public String deleteUser(Model model, HttpServletRequest request) {
+    public String deleteUser(Model model, HttpServletRequest request, @AuthenticationPrincipal CurrentUser currentUser) {
         userService.fullDeleteUserById(currentUser.getUser().getId());
         try {
             request.logout();

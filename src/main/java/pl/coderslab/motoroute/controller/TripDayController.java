@@ -26,12 +26,10 @@ public class TripDayController {
     private final TripDayService tripDayService;
     private final TripService tripService;
     private final RouteService routeService;
-    private CurrentUser currentUser;
 
     /* ================= MODEL ATTRIBUTES ================= */
     @ModelAttribute("currentUser")
     public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        this.currentUser = currentUser;
         return currentUser;
     }
 
@@ -41,7 +39,7 @@ public class TripDayController {
     }
 
     @ModelAttribute("userTripList")
-    public List<Trip> getTripsByUser() {
+    public List<Trip> getTripsByUser(@AuthenticationPrincipal CurrentUser currentUser) {
         return tripService.findAllByUser(currentUser.getUser());
     }
 
@@ -79,7 +77,7 @@ public class TripDayController {
     }
 
     @RequestMapping("/delete/{tripDayId}/{tripId}")
-    public String deleteDayFromTrip(@PathVariable Long tripDayId, @PathVariable Long tripId) {
+    public String deleteDayFromTrip(@PathVariable Long tripDayId, @PathVariable Long tripId, @AuthenticationPrincipal CurrentUser currentUser) {
         TripDay tripDay = tripDayService.findById(tripDayId);
         Trip trip = tripService.findById(tripId);
         if (trip.getUser().getId() == currentUser.getUser().getId()) {
@@ -90,7 +88,7 @@ public class TripDayController {
     }
 
     @RequestMapping("/delete-all/{tripId}")
-    public String deleteAllDaysFromTrip(@PathVariable Long tripId) {
+    public String deleteAllDaysFromTrip(@PathVariable Long tripId, @AuthenticationPrincipal CurrentUser currentUser) {
         Trip trip = tripService.findById(tripId);
         if (trip.getUser().getId() == currentUser.getUser().getId()) {
             tripDayService.deleteAllByTrip(trip);

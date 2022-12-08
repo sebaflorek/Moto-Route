@@ -29,7 +29,6 @@ public class RouteController {
     private final UserService userService;
     private final TripService tripService;
     private final RouteMapper routeMapper;
-    private CurrentUser currentUser;
 
     /* ================= MODEL ATTRIBUTES ================= */
     @ModelAttribute("regionList")
@@ -44,13 +43,12 @@ public class RouteController {
 
     @ModelAttribute("currentUser")
     public CurrentUser getCurrentUser(@AuthenticationPrincipal CurrentUser currentUser) {
-        this.currentUser = currentUser;
         return currentUser;
     }
 
     /* ================= ROUTES READING ================= */
     @RequestMapping("/dashboard")
-    public String showPulpit(Model model) {
+    public String showPulpit(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = currentUser.getUser();
         Route latestRoute = routeService.findLatestByAuthorId(user.getId());
         int routesNum = routeService.countAllByAuthorId(user.getId());
@@ -64,14 +62,14 @@ public class RouteController {
     }
 
     @GetMapping("/my-list")
-    public String getMyRoutesList(Model model) {
+    public String getMyRoutesList(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Route> routes = routeService.findAllByAuthorId(currentUser.getUser().getId());
         model.addAttribute("routeList", routes);
         return "app-routeMyList";
     }
 
     @GetMapping("/fav-list")
-    public String getMyFavRoutesList(Model model) {
+    public String getMyFavRoutesList(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Route> favouriteRoutes = userService.findById(currentUser.getUser().getId()).getFavouriteRoutes();
         model.addAttribute("routeList", favouriteRoutes);
         return "app-routeFavList";
@@ -110,7 +108,7 @@ public class RouteController {
 //    }
 
     @GetMapping("/edit/{id}") // WITH MAPPER
-    public String editRoute(Model model, @PathVariable Long id) {
+    public String editRoute(Model model, @PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         RouteEditDto routeEditDto = routeMapper.routeToRouteEditDto(routeService.findById(id));
         if (routeEditDto.getAuthorId() == currentUser.getUser().getId()) {
             model.addAttribute("routeEditDto", routeEditDto);
@@ -131,8 +129,8 @@ public class RouteController {
 //        return "error-illegal";
 //    }
 
-    @PostMapping("/edit/{id}")
-    public String updateRoute(@Valid RouteEditDto routeEditDto, BindingResult result) {
+    @PostMapping("/edit/{id}") // WITH MAPPER
+    public String updateRoute(@Valid RouteEditDto routeEditDto, BindingResult result, @AuthenticationPrincipal CurrentUser currentUser) {
         if (result.hasErrors()) {
             return "app-routeEdit";
         }
@@ -144,7 +142,7 @@ public class RouteController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String deleteRoute(@PathVariable Long id, Model model) {
+    public String deleteRoute(@PathVariable Long id, Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         Route route = routeService.findById(id);
         if (route.getAuthorId() == currentUser.getUser().getId()) {
             routeService.conditionalDeleteRouteById(id);
@@ -159,7 +157,7 @@ public class RouteController {
     }
 
     @RequestMapping("/{id}/fav-add")
-    public String addRouteToFavorite(@PathVariable Long id) {
+    public String addRouteToFavorite(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         Route route = routeService.findById(id);
         userService.addFavRouteToUser(currentUser.getUser().getId(), route);
         routeService.routeLikePlusOne(id);
@@ -167,7 +165,7 @@ public class RouteController {
     }
 
     @RequestMapping("/{id}/fav-del")
-    public String delRouteFromFavorite(@PathVariable Long id) {
+    public String delRouteFromFavorite(@PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         Route route = routeService.findById(id);
         userService.delFavRouteFromUser(currentUser.getUser().getId(), route);
         routeService.routeLikeMinusOne(id);
@@ -176,7 +174,7 @@ public class RouteController {
 
     /* ================= EMAILS ================= */
     @RequestMapping("/download/{id}")
-    public String downloadRoute(Model model, @PathVariable Long id) {
+    public String downloadRoute(Model model, @PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
         String email = currentUser.getUser().getEmail();
         String receiverName = currentUser.getUser().getUsername();
         Route route = routeService.findById(id);
