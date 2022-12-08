@@ -10,6 +10,7 @@ import pl.coderslab.motoroute.dto.UserEditDto;
 import pl.coderslab.motoroute.dto.UserPassDto;
 import pl.coderslab.motoroute.dto.UserReadDto;
 import pl.coderslab.motoroute.entity.User;
+import pl.coderslab.motoroute.mapper.UserMapper;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.TripService;
 import pl.coderslab.motoroute.service.UserService;
@@ -24,6 +25,7 @@ import javax.validation.Valid;
 public class UserController {
     private final UserService userService;
     private final TripService tripService;
+    private final UserMapper userMapper;
     private CurrentUser currentUser;
 
     @ModelAttribute("currentUser")
@@ -42,13 +44,21 @@ public class UserController {
     }
 
     /* ================= USERS MANAGEMENT ================= */
-    @GetMapping("/edit")
+//    @GetMapping("/edit") // NO MAPPER
+//    public String editUserForm(Model model) {
+//        User user = userService.findById(currentUser.getUser().getId());
+//        UserEditDto userEditDto = new UserEditDto();
+//        userEditDto.setEmail(user.getEmail());
+//        userEditDto.setUsername(user.getUsername());
+//        userEditDto.setId(user.getId());
+//        model.addAttribute("userEditDto", userEditDto);
+//        return "app-userEdit";
+//    }
+
+    @GetMapping("/edit") // WITH MAPPER
     public String editUserForm(Model model) {
         User user = userService.findById(currentUser.getUser().getId());
-        UserEditDto userEditDto = new UserEditDto();
-        userEditDto.setEmail(user.getEmail());
-        userEditDto.setUsername(user.getUsername());
-        userEditDto.setId(user.getId());
+        UserEditDto userEditDto = userMapper.userToUserEditDto(user);
         model.addAttribute("userEditDto", userEditDto);
         return "app-userEdit";
     }

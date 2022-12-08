@@ -9,12 +9,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.RouteCreateDto;
+import pl.coderslab.motoroute.dto.RouteEditDto;
 import pl.coderslab.motoroute.dto.RouteSendDto;
 import pl.coderslab.motoroute.entity.*;
+import pl.coderslab.motoroute.mapper.RouteMapper;
 import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.*;
 
-import javax.swing.*;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -27,6 +28,7 @@ public class RouteController {
     private final TypeService typeService;
     private final UserService userService;
     private final TripService tripService;
+    private final RouteMapper routeMapper;
     private CurrentUser currentUser;
 
     /* ================= MODEL ATTRIBUTES ================= */
@@ -97,23 +99,45 @@ public class RouteController {
         return "redirect:/app/route/dashboard";
     }
 
-    @GetMapping("/edit/{id}")
+//    @GetMapping("/edit/{id}") // NO MAPPER
+//    public String editRoute(Model model, @PathVariable Long id) {
+//        Route route = routeService.findById(id);
+//        if (route.getAuthorId() == currentUser.getUser().getId()) {
+//            model.addAttribute("route", route); // Pamiętać o zmianie na widoku
+//            return "app-routeEdit";
+//        }
+//        return "error-illegal";
+//    }
+
+    @GetMapping("/edit/{id}") // WITH MAPPER
     public String editRoute(Model model, @PathVariable Long id) {
-        Route route = routeService.findById(id);
-        if (route.getAuthorId() == currentUser.getUser().getId()) {
-            model.addAttribute("route", route);
+        RouteEditDto routeEditDto = routeMapper.routeToRouteEditDto(routeService.findById(id));
+        if (routeEditDto.getAuthorId() == currentUser.getUser().getId()) {
+            model.addAttribute("routeEditDto", routeEditDto);
             return "app-routeEdit";
         }
         return "error-illegal";
     }
 
+//    @PostMapping("/edit/{id}") // NO MAPPER
+//    public String updateRoute(@Valid Route route, BindingResult result) {
+//        if (result.hasErrors()) {
+//            return "app-routeEdit";
+//        }
+//        if (route.getAuthorId() == currentUser.getUser().getId()) {
+//            routeService.save(route);
+//            return "redirect:/app/route/my-list";
+//        }
+//        return "error-illegal";
+//    }
+
     @PostMapping("/edit/{id}")
-    public String updateRoute(@Valid Route route, BindingResult result) {
+    public String updateRoute(@Valid RouteEditDto routeEditDto, BindingResult result) {
         if (result.hasErrors()) {
             return "app-routeEdit";
         }
-        if (route.getAuthorId() == currentUser.getUser().getId()) {
-            routeService.save(route);
+        if (routeEditDto.getAuthorId() == currentUser.getUser().getId()) {
+            routeService.updateRouteById(routeEditDto);
             return "redirect:/app/route/my-list";
         }
         return "error-illegal";

@@ -3,12 +3,13 @@ package pl.coderslab.motoroute.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.RouteCreateDto;
+import pl.coderslab.motoroute.dto.RouteEditDto;
 import pl.coderslab.motoroute.emails.EmailService;
 import pl.coderslab.motoroute.entity.Route;
+import pl.coderslab.motoroute.mapper.RouteMapper;
 import pl.coderslab.motoroute.repository.RouteRepository;
 import pl.coderslab.motoroute.repository.TripDayRepository;
 
-import javax.swing.*;
 import javax.transaction.Transactional;
 import java.util.List;
 
@@ -19,22 +20,24 @@ public class RouteService {
     private final RouteRepository routeRepository;
     private final TripDayRepository tripDayRepository;
     private final EmailService emailService;
+    private final RouteMapper routeMapper;
 
     public void save(Route route) {
         routeRepository.save(route);
     }
 
     public void createWithDto(RouteCreateDto routeCreateDto) {
-        Route route = new Route();
-        route.setName(routeCreateDto.getName());
-        route.setDistance(routeCreateDto.getDistance());
-        route.setDescription(routeCreateDto.getDescription());
-        route.setRegion(routeCreateDto.getRegion());
-        route.setType(routeCreateDto.getType());
-        route.setMap(routeCreateDto.getMap());
-        route.setPopularity(0);
-        route.setLikes(0);
-        route.setAuthorId(routeCreateDto.getAuthorId());
+        Route route = routeMapper.routeCreateDtoToRoute(routeCreateDto);
+//        Route route = new Route();
+//        route.setName(routeCreateDto.getName());
+//        route.setDistance(Integer.parseInt(routeCreateDto.getDistance()));
+//        route.setDescription(routeCreateDto.getDescription());
+//        route.setRegion(routeCreateDto.getRegion());
+//        route.setType(routeCreateDto.getType());
+//        route.setMap(routeCreateDto.getMap());
+//        route.setPopularity(0);
+//        route.setLikes(0);
+//        route.setAuthorId(routeCreateDto.getAuthorId());
         routeRepository.save(route);
     }
 
@@ -54,7 +57,8 @@ public class RouteService {
         return routeRepository.findRoutesByAuthorId(authorId);
     }
 
-    public void update(Route route) {
+    public void updateRouteById(RouteEditDto routeEditDto) {
+        Route route = routeMapper.routeEditDtoToRoute(routeEditDto);
         routeRepository.save(route);
     }
 

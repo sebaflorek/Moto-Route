@@ -5,9 +5,11 @@ import pl.coderslab.motoroute.entity.Region;
 import pl.coderslab.motoroute.entity.Type;
 
 import javax.validation.constraints.*;
+import java.time.LocalDateTime;
 
 @Data
-public class RouteCreateDto {
+public class RouteEditDto {
+    private long id;
 
     @NotEmpty
     @Size(min = 3, max = 30, message = "{invalid.name.name-length}")
@@ -15,6 +17,10 @@ public class RouteCreateDto {
 
     @Min(1)
     private String distance;
+
+    @Size(max = 2000)
+    @Pattern(regexp = "https:\\/\\/maps\\.openrouteservice\\.org\\/\\#\\/directions\\/(\\S+)", message = "{invalid.map.map-pattern}")
+    private String map;
 
     @NotEmpty
     @Size(max = 500, message = "{invalid.description.description-length}")
@@ -26,9 +32,10 @@ public class RouteCreateDto {
     @NotNull(message = "{invalid.type.type-notnull}")
     private Type type;
 
-    @Size(max = 2000)
-    @Pattern(regexp = "https:\\/\\/maps\\.openrouteservice\\.org\\/\\#\\/directions\\/(\\S+)", message = "{invalid.map.map-pattern}")
-    private String map;
+    private int popularity;
+    private int likes;
+
+    private LocalDateTime created;
 
     private long authorId;
 

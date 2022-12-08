@@ -15,7 +15,7 @@
     <td class="mainContent">
         <%--CONTENT-START--%>
         <h2>EDYTUJ TRASĘ</h2>
-        <form:form method="post" modelAttribute="route">
+        <form:form method="post" modelAttribute="routeEditDto">
 
             <label>
                 Nazwa trasy:<br>
