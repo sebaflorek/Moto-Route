@@ -12,7 +12,6 @@ import pl.coderslab.motoroute.dto.UserReadDto;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.mapper.UserMapper;
 import pl.coderslab.motoroute.security.CurrentUser;
-import pl.coderslab.motoroute.service.TripService;
 import pl.coderslab.motoroute.service.UserService;
 
 import javax.servlet.ServletException;
@@ -65,7 +64,7 @@ public class UserController {
         if (result.hasErrors()) {
             return "app-userEdit";
         }
-        userService.updateUserById(userEditDto);
+        userService.updateUserByUserEditDto(userEditDto);
         return "redirect:/app/user/details";
     }
 

@@ -14,11 +14,13 @@
         <%--CONTENT-START--%>
         <h2>MOJE WYCIECZKI</h2>
         <hr>
-        <button onclick="location.href='<c:url value="/app/trip-day/add"/>'"
-                type="button">
-            Dodaj trasę do wycieczki
-        </button>
-        <hr>
+        <c:if test="${not empty tripList}">
+            <button onclick="location.href='<c:url value="/app/trip-day/add"/>'"
+                    type="button">
+                Dodaj trasę do wycieczki
+            </button>
+            <hr>
+        </c:if>
         <c:forEach var="trip" items="${tripList}">
             Trasa: <span class=routeName>${trip.name}</span>
             <table class="tab">
@@ -38,7 +40,8 @@
                         </button>
                         <br>
                         <a href='<c:url value="/app/trip/delete/${trip.id}"/>'>
-                            <button onclick="return confirm('Czy na pewno usunąć Wycieczkę?')" type="submit">Usuń</button>
+                            <button onclick="return confirm('Czy na pewno usunąć Wycieczkę?')" type="submit">Usuń
+                            </button>
                         </a>
                     </td>
                 </tr>

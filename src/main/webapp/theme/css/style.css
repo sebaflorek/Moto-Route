@@ -4,17 +4,17 @@ td.sideMenu {
     border: 2px solid darkgrey;
     background-color: lightgray;
     display: inline-block;
-    width: 100px;
+    width: 120px;
     vertical-align: top;
 }
 
 .sideMenu button {
-    width: 100px;
+    width: 120px;
     background-color: darkorange;
 }
 
 .sideMenu button:hover {
-    width: 100px;
+    width: 120px;
     background-color: black;
     color: white;
 }
@@ -96,6 +96,11 @@ td.mainContent {
 .details-table td {
     border: 1px solid #aaa;
     padding: 10px;
+}
+
+.details-table td.actions a {
+    text-decoration: none;
+
 }
 
 /*ROUTE CONTENT*/

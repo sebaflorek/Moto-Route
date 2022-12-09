@@ -74,7 +74,7 @@ public class UserService {
         return userRepository.findAll();
     }
 
-    public void updateUserById(UserEditDto userEditDto) {
+    public void updateUserByUserEditDto(UserEditDto userEditDto) {
         User user = userRepository.findById(userEditDto.getId()).orElse(null);
         assert user != null;
         user.setUsername(userEditDto.getUsername());
@@ -106,6 +106,22 @@ public class UserService {
         User user = findById(userId);
         user.getFavouriteRoutes().remove(route);
         userRepository.save(user);
+    }
+
+    public void disableUserById(long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setEnabled(0);
+            userRepository.save(user);
+        }
+    }
+
+    public void enableUserById(long id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user != null) {
+            user.setEnabled(1);
+            userRepository.save(user);
+        }
     }
 
     private void addRoutesToUser(User user) {
