@@ -27,7 +27,7 @@ public class TripController {
         return currentUser;
     }
 
-    /* ================= TRIPS READING ================= */
+    /* ================= TRIPS READ ================= */
     @GetMapping("/list")
     public String getMyTripsList(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         List<Trip> trips = tripService.findAllByUser(currentUser.getUser());

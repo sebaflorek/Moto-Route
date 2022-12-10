@@ -57,7 +57,7 @@ public class RouteService {
         return routeRepository.findRoutesByAuthorId(authorId);
     }
 
-    public void updateRouteById(RouteEditDto routeEditDto) {
+    public void updateRouteByRouteEditDto(RouteEditDto routeEditDto) {
         Route route = routeMapper.routeEditDtoToRoute(routeEditDto);
         routeRepository.save(route);
     }

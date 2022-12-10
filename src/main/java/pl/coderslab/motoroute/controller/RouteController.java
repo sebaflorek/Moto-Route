@@ -46,7 +46,7 @@ public class RouteController {
         return currentUser;
     }
 
-    /* ================= ROUTES READING ================= */
+    /* ================= ROUTES READ ================= */
     @RequestMapping("/dashboard")
     public String showPulpit(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = currentUser.getUser();
@@ -135,7 +135,7 @@ public class RouteController {
             return "app-routeEdit";
         }
         if (routeEditDto.getAuthorId() == currentUser.getUser().getId()) {
-            routeService.updateRouteById(routeEditDto);
+            routeService.updateRouteByRouteEditDto(routeEditDto);
             return "redirect:/app/route/my-list";
         }
         return "error-illegal";

@@ -102,7 +102,7 @@ public class TripDayController {
     @ResponseBody
     public String test(@PathVariable int dayNumber, @PathVariable long tripId) {
         boolean check = tripDayService.isTripDayUniqueByItsDayNumberAndTripId(dayNumber, tripId);
-        return "rozmiar listy:" + check;
+        return "test: " + check;
     }
 
 

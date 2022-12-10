@@ -1,29 +1,21 @@
 package pl.coderslab.motoroute.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.session.SessionInformation;
-import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import pl.coderslab.motoroute.dto.RouteEditDto;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.motoroute.dto.UserDetailsDto;
 import pl.coderslab.motoroute.dto.UserEditDto;
-import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.User;
 import pl.coderslab.motoroute.mapper.RouteMapper;
 import pl.coderslab.motoroute.mapper.UserMapper;
-import pl.coderslab.motoroute.security.CurrentUser;
 import pl.coderslab.motoroute.service.RouteService;
 import pl.coderslab.motoroute.service.UserService;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,6 +29,7 @@ public class AdminController {
     private final UserMapper userMapper;
     private final RouteMapper routeMapper;
 
+    /* ================= USER MANAGEMENT ================= */
     @RequestMapping("/user/list")
     public String getUserList(Model model) {
         List<UserDetailsDto> users = userService.findAll()
@@ -78,11 +71,12 @@ public class AdminController {
 
     @RequestMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
-        //public String deleteUser(@PathVariable Long id, HttpServletRequest request, HttpSecurity http, SessionRegistry sessionRegistry) {
+        // public String deleteUser(@PathVariable Long id, HttpServletRequest request, HttpSecurity http, SessionRegistry sessionRegistry) {
         userService.fullDeleteUserById(id);
         return "redirect:/admin/user/list";
     }
 
+    /* ================= TRIP MANAGEMENT ================= */
     @RequestMapping("/route/list")
     public String getRouteList(Model model) {
         model.addAttribute("routeList", routeService.findAll());

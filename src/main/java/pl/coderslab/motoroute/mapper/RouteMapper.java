@@ -1,6 +1,7 @@
 package pl.coderslab.motoroute.mapper;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 import pl.coderslab.motoroute.dto.RouteCreateDto;
 import pl.coderslab.motoroute.dto.RouteEditDto;
 import pl.coderslab.motoroute.entity.Route;
@@ -11,6 +12,7 @@ public interface RouteMapper {
     RouteEditDto routeToRouteEditDto(Route route);
     Route routeEditDtoToRoute(RouteEditDto routeEditDto);
     Route routeCreateDtoToRoute(RouteCreateDto routeCreateDto);
+    void routeEditToEntity(@MappingTarget Route route, RouteEditDto routeEditDto);
 
 
 }

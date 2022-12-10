@@ -30,7 +30,7 @@ public class UserController {
         return currentUser;
     }
 
-    /* ================= ROUTES READING ================= */
+    /* ================= USER READ ================= */
     @GetMapping("/details")
     public String getUserDetails(Model model, @AuthenticationPrincipal CurrentUser currentUser) {
         User user = userService.findById(currentUser.getUser().getId());
