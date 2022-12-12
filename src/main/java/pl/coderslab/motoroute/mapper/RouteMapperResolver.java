@@ -29,9 +29,6 @@ public class RouteMapperResolver /* implements RouteMapper */ {
         routeEditDto.setDescription(route.getDescription());
         routeEditDto.setRegion(route.getRegion());
         routeEditDto.setType(route.getType());
-        routeEditDto.setPopularity(route.getPopularity());
-        routeEditDto.setLikes(route.getLikes());
-        routeEditDto.setCreated(route.getCreated());
         routeEditDto.setAuthorId(route.getAuthorId());
 
         return routeEditDto;

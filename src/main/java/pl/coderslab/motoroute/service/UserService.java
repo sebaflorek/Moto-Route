@@ -10,6 +10,7 @@ import pl.coderslab.motoroute.dto.UserPassDto;
 import pl.coderslab.motoroute.entity.Role;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.User;
+import pl.coderslab.motoroute.mapper.UserMapper;
 import pl.coderslab.motoroute.repository.RoleRepository;
 import pl.coderslab.motoroute.repository.TripRepository;
 import pl.coderslab.motoroute.repository.UserRepository;
@@ -28,6 +29,7 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final TripRepository tripRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private final UserMapper userMapper;
 
     public void save(User user) {
         userRepository.save(user);
@@ -76,17 +78,21 @@ public class UserService {
 
     public void updateUserByUserEditDto(UserEditDto userEditDto) {
         User user = userRepository.findById(userEditDto.getId()).orElse(null);
-        assert user != null;
-        user.setUsername(userEditDto.getUsername());
-        user.setEmail(userEditDto.getEmail());
-        userRepository.save(user);
+        if (user != null) {
+            userMapper.userEditDtoToUserEntity(user, userEditDto);
+            userRepository.save(user);
+        }
+//        user.setUsername(userEditDto.getUsername());
+//        user.setEmail(userEditDto.getEmail());
+//        userRepository.save(user);
     }
 
     public void updatePassword(UserPassDto userPassDto) {
         User user = userRepository.findById(userPassDto.getId()).orElse(null);
-        assert user != null;
-        user.setPassword(passwordEncoder.encode(userPassDto.getNewPassword()));
-        userRepository.save(user);
+        if (user != null) {
+            user.setPassword(passwordEncoder.encode(userPassDto.getNewPassword()));
+            userRepository.save(user);
+        }
     }
 
     public void fullDeleteUserById(long id) {

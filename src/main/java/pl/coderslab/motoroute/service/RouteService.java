@@ -58,8 +58,13 @@ public class RouteService {
     }
 
     public void updateRouteByRouteEditDto(RouteEditDto routeEditDto) {
-        Route route = routeMapper.routeEditDtoToRoute(routeEditDto);
-        routeRepository.save(route);
+//        Route route = routeMapper.routeEditDtoToRoute(routeEditDto);
+//        routeRepository.save(route);
+        Route route = routeRepository.findById(routeEditDto.getId()).orElse(null);
+        if (route != null) {
+            routeMapper.routeEditDtoToRouteEntity(route, routeEditDto);
+            routeRepository.save(route);
+        }
     }
 
     public void deleteById(long id) {

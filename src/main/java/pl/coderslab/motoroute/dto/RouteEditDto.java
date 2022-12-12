@@ -32,11 +32,6 @@ public class RouteEditDto {
     @NotNull(message = "{invalid.type.type-notnull}")
     private Type type;
 
-    private int popularity;
-    private int likes;
-
-    private LocalDateTime created;
-
     private long authorId;
 
 }
