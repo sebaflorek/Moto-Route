@@ -1,7 +1,6 @@
 package pl.coderslab.motoroute.dto;
 
 import lombok.Data;
-import pl.coderslab.motoroute.validation.PasswordMatches;
 import pl.coderslab.motoroute.validation.UniqueEmail;
 import pl.coderslab.motoroute.validation.UniqueUsername;
 

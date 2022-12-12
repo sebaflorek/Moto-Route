@@ -28,9 +28,9 @@ public class TypeService {
         return typeRepository.findAll();
     }
 
-//    public void update(Type type) {
-//        typeRepository.save(type);
-//    }
+    public void update(Type type) {
+        typeRepository.save(type);
+    }
 
     public void deleteById(long id) {
         typeRepository.deleteById(id);

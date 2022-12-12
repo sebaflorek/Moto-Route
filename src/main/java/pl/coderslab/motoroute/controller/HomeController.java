@@ -76,7 +76,7 @@ public class HomeController {
         return "contact";
     }
 
-    /* STARTER */
+    /* ================= STARTER ================= */
     @GetMapping("/starter/createUser")
     public void createUser() {
         UserCreateDto userDto = new UserCreateDto();
@@ -97,7 +97,7 @@ public class HomeController {
         userService.saveAsAdminWithDto(userDto);
     }
 
-    /* PASSWORD RESET */
+    /* ================= PASSWORD RESET ================= */
     @GetMapping("/forgot-password")
     public String forgotPasswordForm(Model model) {
         model.addAttribute("userForgotPassDto", new UserForgotPassDto());

@@ -30,8 +30,7 @@ public class TripDayService {
     }
 
     public TripDay findById(long id) {
-        TripDay tripDay = tripDayRepository.findById(id).orElse(null);
-        return tripDay;
+        return tripDayRepository.findById(id).orElse(null);
     }
 
     public boolean isTripDayUniqueByItsDayNumberAndTripId(int dayNumber, long tripId) {

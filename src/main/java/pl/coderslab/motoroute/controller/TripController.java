@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import pl.coderslab.motoroute.dto.TripCreateDto;
 import pl.coderslab.motoroute.entity.Trip;
 import pl.coderslab.motoroute.security.CurrentUser;
-import pl.coderslab.motoroute.service.RouteService;
 import pl.coderslab.motoroute.service.TripService;
 
 import javax.validation.Valid;

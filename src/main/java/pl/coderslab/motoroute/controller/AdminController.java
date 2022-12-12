@@ -71,7 +71,6 @@ public class AdminController {
 
     @RequestMapping("/user/delete/{id}")
     public String deleteUser(@PathVariable Long id) {
-        // public String deleteUser(@PathVariable Long id, HttpServletRequest request, HttpSecurity http, SessionRegistry sessionRegistry) {
         userService.fullDeleteUserById(id);
         return "redirect:/admin/user/list";
     }

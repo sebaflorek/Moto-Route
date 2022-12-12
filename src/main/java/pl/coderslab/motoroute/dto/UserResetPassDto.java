@@ -1,7 +1,6 @@
 package pl.coderslab.motoroute.dto;
 
 import lombok.Data;
-import pl.coderslab.motoroute.validation.ChangePassword;
 import pl.coderslab.motoroute.validation.PasswordMatches;
 
 import javax.validation.constraints.NotEmpty;
