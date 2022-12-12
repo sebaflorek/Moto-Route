@@ -2,6 +2,7 @@ package pl.coderslab.motoroute.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.coderslab.motoroute.dto.RouteAdminReadDto;
 import pl.coderslab.motoroute.dto.RouteCreateDto;
 import pl.coderslab.motoroute.dto.RouteEditDto;
 import pl.coderslab.motoroute.emails.EmailService;
@@ -11,7 +12,10 @@ import pl.coderslab.motoroute.repository.RouteRepository;
 import pl.coderslab.motoroute.repository.TripDayRepository;
 
 import javax.transaction.Transactional;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -51,6 +55,10 @@ public class RouteService {
 
     public List<Route> findAll() {
         return routeRepository.findAll();
+    }
+
+    public List<RouteAdminReadDto> findAllRouteAdminReadDto() {
+        return routeRepository.findAll().stream().map(routeMapper::routeToRouteAdminReadDto).collect(Collectors.toList());
     }
 
     public List<Route> findAllByAuthorId(long authorId) {
@@ -124,6 +132,18 @@ public class RouteService {
 
     public boolean isRouteUsed(long routeId) {
         return !tripDayRepository.findTripDaysByRouteId(routeId).isEmpty();
+    }
+
+    private void convertRouteDates(Route route) {
+        LocalDateTime created = route.getCreated();
+        LocalDateTime updated = route.getUpdated();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        if (created != null) {
+
+        }
+        if (updated != null) {
+
+        }
     }
 
 }

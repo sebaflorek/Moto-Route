@@ -79,7 +79,8 @@ public class AdminController {
     /* ================= TRIP MANAGEMENT ================= */
     @RequestMapping("/route/list")
     public String getRouteList(Model model) {
-        model.addAttribute("routeList", routeService.findAll());
+        model.addAttribute("routeList", routeService.findAllRouteAdminReadDto());
+        System.out.println(routeService.findAllRouteAdminReadDto());
         return "admin-routeList";
     }
 

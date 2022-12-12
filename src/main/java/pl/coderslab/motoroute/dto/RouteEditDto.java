@@ -5,7 +5,6 @@ import pl.coderslab.motoroute.entity.Region;
 import pl.coderslab.motoroute.entity.Type;
 
 import javax.validation.constraints.*;
-import java.time.LocalDateTime;
 
 @Data
 public class RouteEditDto {
