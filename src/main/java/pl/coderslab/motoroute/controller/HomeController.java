@@ -43,11 +43,11 @@ public class HomeController {
     @PostMapping("/register")
     public String registerForm(@Valid UserCreateDto userCreateDto, BindingResult result, Model model) {
         Set<ConstraintViolation<UserCreateDto>> violations = validator.validate(userCreateDto);
-        if (!violations.isEmpty()) { // temporary
-            for (ConstraintViolation<UserCreateDto> violation : violations) {
-                System.out.println(violation.getPropertyPath() + "<-->" + violation.getMessage());
-            }
-        }
+//        if (!violations.isEmpty()) { // temporary
+//            for (ConstraintViolation<UserCreateDto> violation : violations) {
+//                System.out.println(violation.getPropertyPath() + "<-->" + violation.getMessage());
+//            }
+//        }
         if (result.hasErrors()) {
             model.addAttribute("errorList", violations);
             return "userRegister";
