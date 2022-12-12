@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import pl.coderslab.motoroute.dto.UserCreateDto;
 import pl.coderslab.motoroute.dto.UserEditDto;
 import pl.coderslab.motoroute.dto.UserPassDto;
+import pl.coderslab.motoroute.emails.EmailService;
 import pl.coderslab.motoroute.entity.Role;
 import pl.coderslab.motoroute.entity.Route;
 import pl.coderslab.motoroute.entity.User;
@@ -30,6 +31,7 @@ public class UserService {
     private final TripRepository tripRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
+    private final EmailService emailService;
 
     public void save(User user) {
         userRepository.save(user);
@@ -129,6 +131,42 @@ public class UserService {
             userRepository.save(user);
         }
     }
+
+    /* Password reset - start */
+    public void updateResetPasswordTokenByUserEmail(String token, String email) {
+        User user = userRepository.findUserByEmail(email);
+        if (user != null) {
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+        }
+    }
+
+    public User getUserByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    public void setNewPassword(User user, String newPassword) {
+        user.setPassword(passwordEncoder.encode(newPassword));
+        user.setResetPasswordToken(null);
+        userRepository.save(user);
+    }
+
+    public void sendResetPassLinkViaEmail(String email, String link) {
+        User user = userRepository.findUserByEmail(email);
+        String title = "Moto Route: Reset hasła";
+        StringBuilder message = new StringBuilder();
+        message
+                .append("Cześć " + user.getUsername().toUpperCase() + ",\n")
+                .append("\nPoniżej przesyłamy link do zresetowania Twojego hasła.\n")
+                .append("Jeżeli nie resetowałeś hasła to zignoruj tą wiadomość.\n")
+                .append("\n" + link + "\n")
+                .append("\nPozdrawiamy,\n")
+                .append("Zespół Moto Route");
+
+        emailService.sendSimpleEmail(email, title, message.toString());
+
+    }
+    /* Password reset - end */
 
     private void addRoutesToUser(User user) {
         Hibernate.initialize(user.getFavouriteRoutes());

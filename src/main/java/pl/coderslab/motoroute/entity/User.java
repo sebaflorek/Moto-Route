@@ -39,5 +39,7 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "route_id"))
     private List<Route> favouriteRoutes;
 
+    private String resetPasswordToken;
+
 
 }

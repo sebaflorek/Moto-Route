@@ -24,6 +24,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "delete from users_routes where user_id = :userId", nativeQuery = true)
     void deleteUserAllFavoriteRoutesByUserId(@Param("userId") Long userId);
 
+    User findByResetPasswordToken(String resetPasswordToken);
+
 
 
 

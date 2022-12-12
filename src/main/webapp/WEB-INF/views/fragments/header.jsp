@@ -23,6 +23,7 @@
     <%--<div style="display: inline-block; color: lightgray">tymczasowo wyświetlane role:<b><sec:authentication property="authorities"/></b></div>--%>
 </sec:authorize>
 <sec:authorize access="!isAuthenticated()">
-    <div style="display: inline-block">Jesteś niezalogowany</div>
+    <%--<div style="display: inline-block">Jesteś niezalogowany</div>--%>
+    <a style="" href='<c:url value="/forgot-password" />'>Zapomniałem hasło</a>
 </sec:authorize>
 <hr>
