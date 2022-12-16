@@ -1,6 +1,5 @@
 package pl.coderslab.motoroute.validation;
 
-import pl.coderslab.motoroute.dto.UserCreateDto;
 import pl.coderslab.motoroute.dto.UserPassDto;
 
 import javax.validation.ConstraintValidator;
