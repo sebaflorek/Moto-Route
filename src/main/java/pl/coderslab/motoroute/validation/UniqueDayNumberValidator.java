@@ -21,7 +21,12 @@ public class UniqueDayNumberValidator implements ConstraintValidator<UniqueDayNu
             return true;
         }
         long tripId = tripDay.getTrip().getId();
-        int dayNumber = tripDay.getDayNumber();
+        int dayNumber;
+        try {
+            dayNumber = Integer.parseInt(tripDay.getDayNumber());
+        } catch (NumberFormatException e) {
+            return false;
+        }
         if (!tripDayService.isTripDayUniqueByItsDayNumberAndTripId(dayNumber, tripId)) {
             constraintValidatorContext
                     .buildConstraintViolationWithTemplate("{invalid.dayNumber.dayNumber-unique}")

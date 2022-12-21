@@ -23,14 +23,17 @@ Welcome to Web application for motorcyclists.
 3. <ins>Motorcycle Trips</ins> (You can plan multi-day trips with numerous routes to follow) 
 - Adding new trips
 - Editing and deleting your trips
+4. <ins>Administration features</ins>
+- Locking and unlocking user accounts
+- Editing and deleting users
+- Deleting routes
 
 ### Future features
 1. Route details including weather checking on chosen route using weather API
 2. Connecting Moto Route app with Google Maps
-3. Checking routes details via Google APIs
-4. Administration features
+3. Implementing Google APIs for route management
+4. More administration features
 - Adding/editing/deleting regions and route types
-- Deleting/editing users
 5. Advanced front-end
 
 ## Contact us

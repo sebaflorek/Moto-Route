@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 public class TripDayCreateDto {
 
     @Min(1)
-    private int dayNumber;
+    private String dayNumber;
 
     @NotNull(message = "{invalid.route.route-notnull}")
     private Route route;

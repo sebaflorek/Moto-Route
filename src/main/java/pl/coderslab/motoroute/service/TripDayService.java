@@ -23,7 +23,7 @@ public class TripDayService {
 
     public void createWithDto(TripDayCreateDto tripDayCreateDto) {
         TripDay tripDay = new TripDay();
-        tripDay.setDayNumber(tripDayCreateDto.getDayNumber());
+        tripDay.setDayNumber(Integer.parseInt(tripDayCreateDto.getDayNumber()));
         tripDay.setTrip(tripDayCreateDto.getTrip());
         tripDay.setRoute(tripDayCreateDto.getRoute());
         tripDayRepository.save(tripDay);

@@ -175,8 +175,9 @@ public class RouteController {
     /* ================= EMAILS ================= */
     @RequestMapping("/download/{id}")
     public String downloadRoute(Model model, @PathVariable Long id, @AuthenticationPrincipal CurrentUser currentUser) {
-        String email = currentUser.getUser().getEmail();
-        String receiverName = currentUser.getUser().getUsername();
+        User user = userService.findById(currentUser.getUser().getId());
+        String email = user.getEmail();
+        String receiverName = user.getUsername();
         Route route = routeService.findById(id);
         return sendEmail(email, receiverName, route, model);
     }
