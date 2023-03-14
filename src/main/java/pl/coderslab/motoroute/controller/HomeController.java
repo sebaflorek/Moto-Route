@@ -170,13 +170,14 @@ public class HomeController {
         return "Hello " + entityUser.getUsername();
     }
 
-    @RequestMapping("/test")
-    @ResponseBody
-    public String test(HttpServletRequest request) {
-        String contextPath = request.getContextPath();
-        String url = request.getRequestURL().toString();
-        String link = url.replace(request.getServletPath(), "");
-        return "Context path: " + contextPath + " URL: " + url + " Link: " + link;
-    }
+//    @RequestMapping("/checks")
+//    @ResponseBody
+//    public String checks(HttpServletRequest request) {
+//        String contextPath = request.getContextPath();
+//        String servletPath = request.getServletPath();
+//        String url = request.getRequestURL().toString();
+//        String link = url.replace(request.getServletPath(), "");
+//        return "Context path: " + contextPath + "<br>Servlet path: " + servletPath + "<br>URL: " + url + "<br>Link: " + link;
+//    }
 
 }
